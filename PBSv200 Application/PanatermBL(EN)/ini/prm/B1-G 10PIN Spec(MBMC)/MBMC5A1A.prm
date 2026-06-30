@@ -1,0 +1,552 @@
+#
+#
+#File<A:\B1-10P-RS232C\V03-581Ｄ201Ｇ用\MBMC5A1AB_V03.prm>
+#Time & Date<05/02/28 15:46:10>
+#
+#
+#----------------------------------------------
+MODEL          ,1            ,#グループ名と最大データ数
+#             
+DATA           ,0            ,B1-G(MBMC)   ,MBMC5A1A     ,#タイプと機種名
+END
+#----------------------------------------------
+PARA COMMENT   ,5            ,#グループ名と最大データ数
+#
+DATA           ,0            ,"MBMC5A1AB"  ,#覚え書き
+DATA           ,1            ,""           ,#覚え書き
+DATA           ,2            ,""           ,#覚え書き
+DATA           ,3            ,""           ,#覚え書き
+DATA           ,4            ,""           ,#覚え書き
+END
+#----------------------------------------------
+CPU VER        ,11           ,#グループ名と最大データ数
+#
+END
+#----------------------------------------------
+USER DATA      ,256          ,#グループ名と最大データ数
+#
+DATA           ,0x00         ,0            ,#[0x0000]:設定速度(第０速)
+DATA           ,0x01         ,3000         ,#[0x0BB8]:第１速速度
+DATA           ,0x02         ,1200         ,#[0x04B0]:メーカ使用
+DATA           ,0x03         ,600          ,#[0x0258]:メーカ使用
+DATA           ,0x04         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x05         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x06         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x07         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x08         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x09         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x0A         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x0B         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x0C         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x0D         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x0E         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x0F         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x10         ,30           ,#[0x001E]:第１加速時間
+DATA           ,0x11         ,30           ,#[0x001E]:第２加速時間
+DATA           ,0x12         ,30           ,#[0x001E]:第１減速時間
+DATA           ,0x13         ,30           ,#[0x001E]:第２減速時間
+DATA           ,0x14         ,0            ,#[0x0000]:加速モード選択
+DATA           ,0x15         ,0            ,#[0x0000]:減速モード選択
+DATA           ,0x16         ,0            ,#[0x0000]:停止モード選択
+DATA           ,0x17         ,10           ,#[0x000A]:フリーラン待ち時間
+DATA           ,0x18         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x19         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x1A         ,400          ,#[0x0190]:速度ループ比例ゲイン
+DATA           ,0x1B         ,500          ,#[0x01F4]:速度ループ積分ゲイン
+DATA           ,0x1C         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x1D         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x1E         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x1F         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x20         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x21         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x22         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x23         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x24         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x25         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x26         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x27         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x28         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x29         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x2A         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x2B         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x2C         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x2D         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x2E         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x2F         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x30         ,1            ,#[0x0001]:運転指令選択
+DATA           ,0x31         ,1            ,#[0x0001]:速度指令選択
+DATA           ,0x32         ,1            ,#[0x0001]:運転モード選択
+DATA           ,0x33         ,2            ,#[0x0002]:I1/I2機能選択
+DATA           ,0x34         ,0            ,#[0x0000]:I3機能選択
+DATA           ,0x35         ,3            ,#[0x0003]:メーカ使用
+DATA           ,0x36         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x37         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x38         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x39         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x3A         ,0            ,#[0x0000]:下限速度
+DATA           ,0x3B         ,3000         ,#[0x0BB8]:上限速度
+DATA           ,0x3C         ,150          ,#[0x0096]:トルクリミット
+DATA           ,0x3D         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x3E         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x3F         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x40         ,0            ,#[0x0000]:出力信号①選択
+DATA           ,0x41         ,7            ,#[0x0007]:出力信号②選択
+DATA           ,0x42         ,0            ,#[0x0000]:出力信号①極性選択
+DATA           ,0x43         ,0            ,#[0x0000]:出力信号②極性選択
+DATA           ,0x44         ,50           ,#[0x0032]:一致検出幅
+DATA           ,0x45         ,7            ,#[0x0007]:出力パルス数選択
+DATA           ,0x46         ,0            ,#[0x0000]:モニタモード切替
+DATA           ,0x47         ,1            ,#[0x0001]:表示倍率分子
+DATA           ,0x48         ,1            ,#[0x0001]:表示倍率分母
+DATA           ,0x49         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x4A         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x4B         ,0            ,#[0x0000]:トリップ履歴①
+DATA           ,0x4C         ,0            ,#[0x0000]:トリップ履歴②
+DATA           ,0x4D         ,0            ,#[0x0000]:トリップ履歴③
+DATA           ,0x4E         ,0            ,#[0x0000]:トリップ履歴④
+DATA           ,0x4F         ,0            ,#[0x0000]:トリップ履歴⑤
+DATA           ,0x50         ,0            ,#[0x0000]:不足電圧トリップ
+DATA           ,0x51         ,0            ,#[0x0000]:リトライ選択
+DATA           ,0x52         ,5            ,#[0x0005]:リトライ待ち時間
+DATA           ,0x53         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x54         ,0            ,#[0x0000]:パラメータ初期化
+DATA           ,0x55         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x56         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x57         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x58         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x59         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x5A         ,129          ,#[0x0081]:RS485 機器番号
+DATA           ,0x5B         ,2            ,#[0x0002]:RS485 通信速度
+DATA           ,0x5C         ,4            ,#[0x0004]:RS485 通信規格
+DATA           ,0x5D         ,10           ,#[0x000A]:RS485 通信応答時間
+DATA           ,0x5E         ,9            ,#[0x0009]:RS485 通信リトライ回数
+DATA           ,0x5F         ,2            ,#[0x0002]:RS485 プロトコルタイムアウト
+DATA           ,0x60         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x61         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x62         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x63         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x64         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x65         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x66         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x67         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x68         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x69         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x6A         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x6B         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x6C         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x6D         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x6E         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x6F         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x70         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x71         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x72         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x73         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x74         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x75         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x76         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x77         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x78         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x79         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x7A         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x7B         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x7C         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x7D         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x7E         ,0            ,#[0x0000]:メーカ使用
+DATA           ,0x7F         ,204          ,#[0x00CC]:メーカ使用
+DATA           ,0x80         ,0            ,#[0x0000]:Internal use
+DATA           ,0x81         ,0            ,#[0x0000]:Internal use
+DATA           ,0x82         ,0            ,#[0x0000]:Internal use
+DATA           ,0x83         ,3            ,#[0x0003]:Internal use
+DATA           ,0x84         ,13           ,#[0x000D]:Internal use
+DATA           ,0x85         ,0            ,#[0x0000]:Internal use
+DATA           ,0x86         ,1            ,#[0x0001]:Internal use
+DATA           ,0x87         ,80           ,#[0x0050]:Internal use
+DATA           ,0x88         ,50           ,#[0x0032]:Internal use
+DATA           ,0x89         ,150          ,#[0x0096]:Internal use
+DATA           ,0x8A         ,1            ,#[0x0001]:Internal use
+DATA           ,0x8B         ,0            ,#[0x0000]:Internal use
+DATA           ,0x8C         ,0            ,#[0x0000]:Internal use
+DATA           ,0x8D         ,0            ,#[0x0000]:Internal use
+DATA           ,0x8E         ,0            ,#[0x0000]:Internal use
+DATA           ,0x8F         ,0            ,#[0x0000]:Internal use
+DATA           ,0x90         ,0            ,#[0x0000]:Internal use
+DATA           ,0x91         ,1            ,#[0x0001]:Internal use
+DATA           ,0x92         ,0            ,#[0x0000]:Internal use
+DATA           ,0x93         ,0            ,#[0x0000]:Internal use
+DATA           ,0x94         ,955          ,#[0x03BB]:Internal use
+DATA           ,0x95         ,350          ,#[0x015E]:Internal use
+DATA           ,0x96         ,1960         ,#[0x07A8]:Internal use
+DATA           ,0x97         ,115          ,#[0x0073]:Internal use
+DATA           ,0x98         ,4            ,#[0x0004]:Internal use
+DATA           ,0x99         ,0            ,#[0x0000]:Internal use
+DATA           ,0x9A         ,0            ,#[0x0000]:Internal use
+DATA           ,0x9B         ,0            ,#[0x0000]:Internal use
+DATA           ,0x9C         ,7            ,#[0x0007]:Internal use
+DATA           ,0x9D         ,0            ,#[0x0000]:Internal use
+DATA           ,0x9E         ,0            ,#[0x0000]:Internal use
+DATA           ,0x9F         ,0            ,#[0x0000]:Internal use
+DATA           ,0xA0         ,0            ,#[0x0000]:Internal use
+DATA           ,0xA1         ,15000        ,#[0x3A98]:Internal use
+DATA           ,0xA2         ,15000        ,#[0x3A98]:Internal use
+DATA           ,0xA3         ,10           ,#[0x000A]:Internal use
+DATA           ,0xA4         ,2            ,#[0x0002]:Internal use
+DATA           ,0xA5         ,64           ,#[0x0040]:Internal use
+DATA           ,0xA6         ,50           ,#[0x0032]:Internal use
+DATA           ,0xA7         ,90           ,#[0x005A]:Internal use
+DATA           ,0xA8         ,1000         ,#[0x03E8]:Internal use
+DATA           ,0xA9         ,1500         ,#[0x05DC]:Internal use
+DATA           ,0xAA         ,100          ,#[0x0064]:Internal use
+DATA           ,0xAB         ,100          ,#[0x0064]:Internal use
+DATA           ,0xAC         ,0            ,#[0x0000]:Internal use
+DATA           ,0xAD         ,3000         ,#[0x0BB8]:Internal use
+DATA           ,0xAE         ,0            ,#[0x0000]:Internal use
+DATA           ,0xAF         ,0            ,#[0x0000]:Internal use
+DATA           ,0xB0         ,256          ,#[0x0100]:Internal use
+DATA           ,0xB1         ,1000         ,#[0x03E8]:Internal use
+DATA           ,0xB2         ,0            ,#[0x0000]:Internal use
+DATA           ,0xB3         ,858          ,#[0x035A]:Internal use
+DATA           ,0xB4         ,4500         ,#[0x1194]:Internal use
+DATA           ,0xB5         ,100          ,#[0x0064]:Internal use
+DATA           ,0xB6         ,115          ,#[0x0073]:Internal use
+DATA           ,0xB7         ,0            ,#[0x0000]:Internal use
+DATA           ,0xB8         ,40           ,#[0x0028]:Internal use
+DATA           ,0xB9         ,200          ,#[0x00C8]:Internal use
+DATA           ,0xBA         ,190          ,#[0x00BE]:Internal use
+DATA           ,0xBB         ,180          ,#[0x00B4]:Internal use
+DATA           ,0xBC         ,15           ,#[0x000F]:Internal use
+DATA           ,0xBD         ,1080         ,#[0x0438]:Internal use
+DATA           ,0xBE         ,90           ,#[0x005A]:Internal use
+DATA           ,0xBF         ,0            ,#[0x0000]:Internal use
+DATA           ,0xC0         ,254          ,#[0x00FE]:Internal use
+DATA           ,0xC1         ,10           ,#[0x000A]:Internal use
+DATA           ,0xC2         ,0            ,#[0x0000]:Internal use
+DATA           ,0xC3         ,116          ,#[0x0074]:Internal use
+DATA           ,0xC4         ,10           ,#[0x000A]:Internal use
+DATA           ,0xC5         ,-1024        ,#[0xFC00]:Internal use
+DATA           ,0xC6         ,0            ,#[0x0000]:Internal use
+DATA           ,0xC7         ,24576        ,#[0x6000]:Internal use
+DATA           ,0xC8         ,0            ,#[0x0000]:Internal use
+DATA           ,0xC9         ,0            ,#[0x0000]:Internal use
+DATA           ,0xCA         ,0            ,#[0x0000]:Internal use
+DATA           ,0xCB         ,0            ,#[0x0000]:Internal use
+DATA           ,0xCC         ,0            ,#[0x0000]:Internal use
+DATA           ,0xCD         ,0            ,#[0x0000]:Internal use
+DATA           ,0xCE         ,1            ,#[0x0001]:Internal use
+DATA           ,0xCF         ,0            ,#[0x0000]:Internal use
+DATA           ,0xD0         ,3000         ,#[0x0BB8]:Internal use
+DATA           ,0xD1         ,30           ,#[0x001E]:Internal use
+DATA           ,0xD2         ,30           ,#[0x001E]:Internal use
+DATA           ,0xD3         ,30           ,#[0x001E]:Internal use
+DATA           ,0xD4         ,30           ,#[0x001E]:Internal use
+DATA           ,0xD5         ,0            ,#[0x0000]:Internal use
+DATA           ,0xD6         ,400          ,#[0x0190]:Internal use
+DATA           ,0xD7         ,500          ,#[0x01F4]:Internal use
+DATA           ,0xD8         ,1            ,#[0x0001]:Internal use
+DATA           ,0xD9         ,1            ,#[0x0001]:Internal use
+DATA           ,0xDA         ,2            ,#[0x0002]:Internal use
+DATA           ,0xDB         ,0            ,#[0x0000]:Internal use
+DATA           ,0xDC         ,3            ,#[0x0003]:Internal use
+DATA           ,0xDD         ,0            ,#[0x0000]:Internal use
+DATA           ,0xDE         ,0            ,#[0x0000]:Internal use
+DATA           ,0xDF         ,3000         ,#[0x0BB8]:Internal use
+DATA           ,0xE0         ,19778        ,#[0x4D42]:Internal use
+DATA           ,0xE1         ,19779        ,#[0x4D43]:Internal use
+DATA           ,0xE2         ,13633        ,#[0x3541]:Internal use
+DATA           ,0xE3         ,12609        ,#[0x3141]:Internal use
+DATA           ,0xE4         ,0            ,#[0x0000]:Internal use
+DATA           ,0xE5         ,0            ,#[0x0000]:Internal use
+DATA           ,0xE6         ,0            ,#[0x0000]:Internal use
+DATA           ,0xE7         ,0            ,#[0x0000]:Internal use
+DATA           ,0xE8         ,0            ,#[0x0000]:Internal use
+DATA           ,0xE9         ,0            ,#[0x0000]:Internal use
+DATA           ,0xEA         ,0            ,#[0x0000]:Internal use
+DATA           ,0xEB         ,0            ,#[0x0000]:Internal use
+DATA           ,0xEC         ,0            ,#[0x0000]:Internal use
+DATA           ,0xED         ,0            ,#[0x0000]:Internal use
+DATA           ,0xEE         ,0            ,#[0x0000]:Internal use
+DATA           ,0xEF         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF0         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF1         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF2         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF3         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF4         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF5         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF6         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF7         ,302          ,#[0x012E]:Internal use
+DATA           ,0xF8         ,0            ,#[0x0000]:Internal use
+DATA           ,0xF9         ,0            ,#[0x0000]:Internal use
+DATA           ,0xFA         ,0            ,#[0x0000]:Internal use
+DATA           ,0xFB         ,0            ,#[0x0000]:Internal use
+DATA           ,0xFC         ,0            ,#[0x0000]:Internal use
+DATA           ,0xFD         ,0            ,#[0x0000]:Internal use
+DATA           ,0xFE         ,0            ,#[0x0000]:Internal use
+DATA           ,0xFF         ,0            ,#[0x0000]:Internal use
+END
+#----------------------------------------------
+PARA TYPE      ,256          ,#グループ名と最大データ数
+#
+DATA           ,0            ,2            ,#設定速度(第０速)
+DATA           ,1            ,2            ,#第１速速度 
+DATA           ,2            ,2            ,#メーカ使用 
+DATA           ,3            ,2            ,#メーカ使用 
+DATA           ,4            ,2            ,#メーカ使用 
+DATA           ,5            ,2            ,#メーカ使用 
+DATA           ,6            ,2            ,#メーカ使用 
+DATA           ,7            ,2            ,#メーカ使用 
+DATA           ,8            ,2            ,#メーカ使用 
+DATA           ,9            ,2            ,#メーカ使用 
+DATA           ,10           ,2            ,#メーカ使用 
+DATA           ,11           ,2            ,#メーカ使用 
+DATA           ,12           ,2            ,#メーカ使用 
+DATA           ,13           ,2            ,#メーカ使用 
+DATA           ,14           ,2            ,#メーカ使用 
+DATA           ,15           ,2            ,#メーカ使用 
+DATA           ,16           ,3            ,#第１加速時間
+DATA           ,17           ,3            ,#第２加速時間
+DATA           ,18           ,3            ,#第１減速時間
+DATA           ,19           ,3            ,#第２減速時間
+DATA           ,20           ,3            ,#加速モード選択
+DATA           ,21           ,2            ,#減速モード選択
+DATA           ,22           ,2            ,#停止モード選択
+DATA           ,23           ,2            ,#フリーラン待ち時間
+DATA           ,24           ,2            ,#メーカ使用 
+DATA           ,25           ,2            ,#メーカ使用 
+DATA           ,26           ,2            ,#速度ループ比例ゲイン
+DATA           ,27           ,2            ,#速度ループ積分ゲイン
+DATA           ,28           ,2            ,#メーカ使用 
+DATA           ,29           ,2            ,#メーカ使用 
+DATA           ,30           ,2            ,#メーカ使用 
+DATA           ,31           ,2            ,#メーカ使用 
+DATA           ,32           ,3            ,#メーカ使用 
+DATA           ,33           ,2            ,#メーカ使用 
+DATA           ,34           ,2            ,#メーカ使用 
+DATA           ,35           ,2            ,#メーカ使用 
+DATA           ,36           ,2            ,#メーカ使用 
+DATA           ,37           ,2            ,#メーカ使用 
+DATA           ,38           ,2            ,#メーカ使用 
+DATA           ,39           ,2            ,#メーカ使用 
+DATA           ,40           ,2            ,#メーカ使用 
+DATA           ,41           ,2            ,#メーカ使用 
+DATA           ,42           ,2            ,#メーカ使用 
+DATA           ,43           ,2            ,#メーカ使用 
+DATA           ,44           ,2            ,#メーカ使用 
+DATA           ,45           ,2            ,#メーカ使用 
+DATA           ,46           ,2            ,#メーカ使用 
+DATA           ,47           ,2            ,#メーカ使用 
+DATA           ,48           ,2            ,#運転指令選択
+DATA           ,49           ,2            ,#速度指令選択
+DATA           ,50           ,2            ,#運転モード選択
+DATA           ,51           ,2            ,#I1/I2機能選択
+DATA           ,52           ,2            ,#I3機能選択 
+DATA           ,53           ,2            ,#メーカ使用 
+DATA           ,54           ,2            ,#メーカ使用 
+DATA           ,55           ,2            ,#メーカ使用 
+DATA           ,56           ,2            ,#メーカ使用 
+DATA           ,57           ,2            ,#メーカ使用 
+DATA           ,58           ,2            ,#下限速度   
+DATA           ,59           ,2            ,#上限速度   
+DATA           ,60           ,2            ,#トルクリミット
+DATA           ,61           ,2            ,#メーカ使用 
+DATA           ,62           ,2            ,#メーカ使用 
+DATA           ,63           ,2            ,#メーカ使用 
+DATA           ,64           ,2            ,#出力信号①選択
+DATA           ,65           ,2            ,#出力信号②選択
+DATA           ,66           ,2            ,#出力信号①極性選択
+DATA           ,67           ,2            ,#出力信号②極性選択
+DATA           ,68           ,2            ,#一致検出幅 
+DATA           ,69           ,2            ,#出力パルス数選択
+DATA           ,70           ,2            ,#モニタモード切替
+DATA           ,71           ,2            ,#表示倍率分子
+DATA           ,72           ,2            ,#表示倍率分母
+DATA           ,73           ,2            ,#メーカ使用 
+DATA           ,74           ,2            ,#メーカ使用 
+DATA           ,75           ,2            ,#トリップ履歴①
+DATA           ,76           ,2            ,#トリップ履歴②
+DATA           ,77           ,2            ,#トリップ履歴③
+DATA           ,78           ,2            ,#トリップ履歴④
+DATA           ,79           ,2            ,#トリップ履歴⑤
+DATA           ,80           ,2            ,#不足電圧トリップ
+DATA           ,81           ,2            ,#リトライ選択
+DATA           ,82           ,2            ,#リトライ待ち時間
+DATA           ,83           ,2            ,#メーカ使用 
+DATA           ,84           ,2            ,#パラメータ初期化
+DATA           ,85           ,2            ,#メーカ使用 
+DATA           ,86           ,2            ,#メーカ使用 
+DATA           ,87           ,2            ,#メーカ使用 
+DATA           ,88           ,2            ,#メーカ使用 
+DATA           ,89           ,2            ,#メーカ使用 
+DATA           ,90           ,2            ,#RS485 機器番号
+DATA           ,91           ,2            ,#RS485 通信速度
+DATA           ,92           ,2            ,#RS485 通信規格
+DATA           ,93           ,2            ,#RS485 通信応答時間
+DATA           ,94           ,2            ,#RS485 通信リトライ回数
+DATA           ,95           ,2            ,#RS485 プロトコルタイムアウト
+DATA           ,96           ,2            ,#メーカ使用 
+DATA           ,97           ,2            ,#メーカ使用 
+DATA           ,98           ,2            ,#メーカ使用 
+DATA           ,99           ,2            ,#メーカ使用 
+DATA           ,100          ,2            ,#メーカ使用 
+DATA           ,101          ,2            ,#メーカ使用 
+DATA           ,102          ,2            ,#メーカ使用 
+DATA           ,103          ,2            ,#メーカ使用 
+DATA           ,104          ,2            ,#メーカ使用 
+DATA           ,105          ,2            ,#メーカ使用 
+DATA           ,106          ,2            ,#メーカ使用 
+DATA           ,107          ,2            ,#メーカ使用 
+DATA           ,108          ,2            ,#メーカ使用 
+DATA           ,109          ,2            ,#メーカ使用 
+DATA           ,110          ,2            ,#メーカ使用 
+DATA           ,111          ,2            ,#メーカ使用 
+DATA           ,112          ,2            ,#メーカ使用 
+DATA           ,113          ,2            ,#メーカ使用 
+DATA           ,114          ,2            ,#メーカ使用 
+DATA           ,115          ,2            ,#メーカ使用 
+DATA           ,116          ,2            ,#メーカ使用 
+DATA           ,117          ,2            ,#メーカ使用 
+DATA           ,118          ,2            ,#メーカ使用 
+DATA           ,119          ,2            ,#メーカ使用 
+DATA           ,120          ,2            ,#メーカ使用 
+DATA           ,121          ,2            ,#メーカ使用 
+DATA           ,122          ,2            ,#メーカ使用 
+DATA           ,123          ,2            ,#メーカ使用 
+DATA           ,124          ,2            ,#メーカ使用 
+DATA           ,125          ,2            ,#メーカ使用 
+DATA           ,126          ,2            ,#メーカ使用 
+DATA           ,127          ,2            ,#メーカ使用 
+DATA           ,128          ,0            ,#Internal use
+DATA           ,129          ,0            ,#Internal use
+DATA           ,130          ,0            ,#Internal use
+DATA           ,131          ,0            ,#Internal use
+DATA           ,132          ,0            ,#Internal use
+DATA           ,133          ,0            ,#Internal use
+DATA           ,134          ,0            ,#Internal use
+DATA           ,135          ,0            ,#Internal use
+DATA           ,136          ,0            ,#Internal use
+DATA           ,137          ,0            ,#Internal use
+DATA           ,138          ,0            ,#Internal use
+DATA           ,139          ,0            ,#Internal use
+DATA           ,140          ,0            ,#Internal use
+DATA           ,141          ,0            ,#Internal use
+DATA           ,142          ,0            ,#Internal use
+DATA           ,143          ,0            ,#Internal use
+DATA           ,144          ,0            ,#Internal use
+DATA           ,145          ,0            ,#Internal use
+DATA           ,146          ,0            ,#Internal use
+DATA           ,147          ,0            ,#Internal use
+DATA           ,148          ,0            ,#Internal use
+DATA           ,149          ,0            ,#Internal use
+DATA           ,150          ,0            ,#Internal use
+DATA           ,151          ,0            ,#Internal use
+DATA           ,152          ,0            ,#Internal use
+DATA           ,153          ,0            ,#Internal use
+DATA           ,154          ,0            ,#Internal use
+DATA           ,155          ,0            ,#Internal use
+DATA           ,156          ,0            ,#Internal use
+DATA           ,157          ,0            ,#Internal use
+DATA           ,158          ,0            ,#Internal use
+DATA           ,159          ,0            ,#Internal use
+DATA           ,160          ,0            ,#Internal use
+DATA           ,161          ,0            ,#Internal use
+DATA           ,162          ,0            ,#Internal use
+DATA           ,163          ,0            ,#Internal use
+DATA           ,164          ,0            ,#Internal use
+DATA           ,165          ,0            ,#Internal use
+DATA           ,166          ,0            ,#Internal use
+DATA           ,167          ,0            ,#Internal use
+DATA           ,168          ,0            ,#Internal use
+DATA           ,169          ,0            ,#Internal use
+DATA           ,170          ,0            ,#Internal use
+DATA           ,171          ,0            ,#Internal use
+DATA           ,172          ,0            ,#Internal use
+DATA           ,173          ,0            ,#Internal use
+DATA           ,174          ,0            ,#Internal use
+DATA           ,175          ,0            ,#Internal use
+DATA           ,176          ,0            ,#Internal use
+DATA           ,177          ,0            ,#Internal use
+DATA           ,178          ,0            ,#Internal use
+DATA           ,179          ,0            ,#Internal use
+DATA           ,180          ,0            ,#Internal use
+DATA           ,181          ,0            ,#Internal use
+DATA           ,182          ,0            ,#Internal use
+DATA           ,183          ,0            ,#Internal use
+DATA           ,184          ,0            ,#Internal use
+DATA           ,185          ,0            ,#Internal use
+DATA           ,186          ,0            ,#Internal use
+DATA           ,187          ,0            ,#Internal use
+DATA           ,188          ,0            ,#Internal use
+DATA           ,189          ,0            ,#Internal use
+DATA           ,190          ,0            ,#Internal use
+DATA           ,191          ,0            ,#Internal use
+DATA           ,192          ,0            ,#Internal use
+DATA           ,193          ,0            ,#Internal use
+DATA           ,194          ,0            ,#Internal use
+DATA           ,195          ,0            ,#Internal use
+DATA           ,196          ,0            ,#Internal use
+DATA           ,197          ,0            ,#Internal use
+DATA           ,198          ,0            ,#Internal use
+DATA           ,199          ,0            ,#Internal use
+DATA           ,200          ,0            ,#Internal use
+DATA           ,201          ,0            ,#Internal use
+DATA           ,202          ,0            ,#Internal use
+DATA           ,203          ,0            ,#Internal use
+DATA           ,204          ,0            ,#Internal use
+DATA           ,205          ,0            ,#Internal use
+DATA           ,206          ,0            ,#Internal use
+DATA           ,207          ,0            ,#Internal use
+DATA           ,208          ,0            ,#Internal use
+DATA           ,209          ,0            ,#Internal use
+DATA           ,210          ,0            ,#Internal use
+DATA           ,211          ,0            ,#Internal use
+DATA           ,212          ,0            ,#Internal use
+DATA           ,213          ,0            ,#Internal use
+DATA           ,214          ,0            ,#Internal use
+DATA           ,215          ,0            ,#Internal use
+DATA           ,216          ,0            ,#Internal use
+DATA           ,217          ,0            ,#Internal use
+DATA           ,218          ,0            ,#Internal use
+DATA           ,219          ,0            ,#Internal use
+DATA           ,220          ,0            ,#Internal use
+DATA           ,221          ,0            ,#Internal use
+DATA           ,222          ,0            ,#Internal use
+DATA           ,223          ,0            ,#Internal use
+DATA           ,224          ,0            ,#Internal use
+DATA           ,225          ,0            ,#Internal use
+DATA           ,226          ,0            ,#Internal use
+DATA           ,227          ,0            ,#Internal use
+DATA           ,228          ,0            ,#Internal use
+DATA           ,229          ,0            ,#Internal use
+DATA           ,230          ,0            ,#Internal use
+DATA           ,231          ,0            ,#Internal use
+DATA           ,232          ,0            ,#Internal use
+DATA           ,233          ,0            ,#Internal use
+DATA           ,234          ,0            ,#Internal use
+DATA           ,235          ,0            ,#Internal use
+DATA           ,236          ,0            ,#Internal use
+DATA           ,237          ,0            ,#Internal use
+DATA           ,238          ,0            ,#Internal use
+DATA           ,239          ,0            ,#Internal use
+DATA           ,240          ,0            ,#Internal use
+DATA           ,241          ,0            ,#Internal use
+DATA           ,242          ,0            ,#Internal use
+DATA           ,243          ,0            ,#Internal use
+DATA           ,244          ,0            ,#Internal use
+DATA           ,245          ,0            ,#Internal use
+DATA           ,246          ,0            ,#Internal use
+DATA           ,247          ,0            ,#Internal use
+DATA           ,248          ,0            ,#Internal use
+DATA           ,249          ,0            ,#Internal use
+DATA           ,250          ,0            ,#Internal use
+DATA           ,251          ,0            ,#Internal use
+DATA           ,252          ,0            ,#Internal use
+DATA           ,253          ,0            ,#Internal use
+DATA           ,254          ,0            ,#Internal use
+DATA           ,255          ,0            ,#Internal use
+END
+#----------------------------------------------
+DEF END        ,0           
+#
+#
+#
+#ファイル終了
+#
+#

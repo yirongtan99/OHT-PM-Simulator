@@ -92,6 +92,7 @@ public sealed class MainForm : Form
     private Button btnToggleCamera = new();
     private Button btnReset = new();
     private Button btnComplete = new();
+    private Button btnLaunchHokuyo = new();
 
     public MainForm()
     {
@@ -294,21 +295,6 @@ public sealed class MainForm : Form
 
         root.Controls.Add(right, 1, 0);
 
-        var sourceBar = new Panel { Dock = DockStyle.Fill, BackColor = Color.FromArgb(20, 27, 45), Margin = new Padding(0, 0, 0, 12) };
-        sourceBar.Controls.Add(new Label { Text = "Waveform Source Window", Bounds = new Rectangle(16, 10, 180, 20), ForeColor = Color.FromArgb(148, 163, 184), Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold) });
-        cmbWindow = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Bounds = new Rectangle(16, 30, 380, 26), BackColor = Color.FromArgb(11, 15, 26), ForeColor = Color.FromArgb(248, 250, 252), FlatStyle = FlatStyle.Flat };
-        sourceBar.Controls.Add(cmbWindow);
-        btnRefreshWindows = TopBarButton("Refresh", Color.FromArgb(45, 52, 54), Color.White, BtnRefreshWindows_Click);
-        btnRefreshWindows.SetBounds(406, 28, 94, 30);
-        sourceBar.Controls.Add(btnRefreshWindows);
-
-        btnToggleCamera = TopBarButton("Start PC Camera", Color.FromArgb(9, 132, 227), Color.White, BtnToggleCamera_Click);
-        btnToggleCamera.SetBounds(516, 28, 120, 30);
-        sourceBar.Controls.Add(btnToggleCamera);
-        lblWaveSource = new Label { Text = "No live app selected. Placeholder waveform active.", Bounds = new Rectangle(660, 32, 520, 22), ForeColor = Color.FromArgb(148, 163, 184) };
-        sourceBar.Controls.Add(lblWaveSource);
-        right.Controls.Add(sourceBar, 0, 0);
-
         var top = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1, Margin = Padding.Empty, BackColor = Color.FromArgb(11, 15, 26) };
         top.ColumnStyles.Clear();
         top.RowStyles.Clear();
@@ -316,11 +302,11 @@ public sealed class MainForm : Form
         top.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44));
         right.Controls.Add(top, 0, 1);
 
-        var wfCard = Card("Sensor Waveform Reading - Select Live App Window");
+        var wfCard = Card("Sensor Waveform Reading");
 
         lblReading = new Label
         {
-            Bounds = new Rectangle(16, 40, 360, 22),
+            Bounds = new Rectangle(16, 40, 400, 22),
             Text = "Reading source: placeholder / no live app selected",
             ForeColor = Color.FromArgb(226, 232, 240)
         };
@@ -329,8 +315,7 @@ public sealed class MainForm : Form
         cmbWindow = new ComboBox
         {
             DropDownStyle = ComboBoxStyle.DropDownList,
-            Bounds = new Rectangle(16, 66, 420, 28),
-            Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+            Bounds = new Rectangle(16, 66, 280, 28),
             BackColor = Color.FromArgb(11, 15, 26),
             ForeColor = Color.FromArgb(248, 250, 252),
             FlatStyle = FlatStyle.Flat
@@ -338,21 +323,17 @@ public sealed class MainForm : Form
         wfCard.Controls.Add(cmbWindow);
 
         btnRefreshWindows = TopBarButton("Refresh App List", Color.FromArgb(45, 52, 54), Color.White, BtnRefreshWindows_Click);
-        btnRefreshWindows.SetBounds(450, 66, 130, 28);
+        btnRefreshWindows.SetBounds(306, 66, 120, 28);
         wfCard.Controls.Add(btnRefreshWindows);
 
-        lblWaveSource = new Label
-        {
-            Text = "Choose an already-open app window to display here.",
-            Bounds = new Rectangle(16, 98, 620, 22),
-            ForeColor = Color.FromArgb(148, 163, 184)
-        };
-        wfCard.Controls.Add(lblWaveSource);
+        btnLaunchHokuyo = TopBarButton("Launch Hokuyo", Color.FromArgb(9, 132, 227), Color.White, BtnLaunchHokuyo_Click);
+        btnLaunchHokuyo.SetBounds(436, 66, 120, 28);
+        wfCard.Controls.Add(btnLaunchHokuyo);
 
         waveformBox = new PictureBox
         {
             Dock = DockStyle.Fill,
-            Margin = new Padding(14, 126, 14, 14),
+            Margin = new Padding(14, 106, 14, 14),
             BackColor = Color.FromArgb(11, 15, 26),
             SizeMode = PictureBoxSizeMode.Zoom,
             BorderStyle = BorderStyle.None
@@ -743,6 +724,66 @@ public sealed class MainForm : Form
     {
         RefreshWindowList();
         Log("Refreshed visible window list for waveform source selection.");
+    }
+
+    private void BtnLaunchHokuyo_Click(object? sender, EventArgs e)
+    {
+        string appDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PBSv200 Application");
+        string exePath = Path.Combine(appDir, "pbscfg.exe");
+        
+        if (!File.Exists(exePath))
+        {
+            appDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "PBSv200 Application");
+            exePath = Path.Combine(appDir, "pbscfg.exe");
+        }
+        
+        if (!File.Exists(exePath))
+        {
+            appDir = Path.Combine(Directory.GetCurrentDirectory(), "PBSv200 Application");
+            exePath = Path.Combine(appDir, "pbscfg.exe");
+        }
+
+        if (!File.Exists(exePath))
+        {
+            MessageBox.Show("Could not find pbscfg.exe.\nExpected path:\n" + exePath, "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        try
+        {
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = exePath,
+                WorkingDirectory = appDir,
+                UseShellExecute = true
+            };
+            Process.Start(startInfo);
+            Log("Launched Hokuyo PBS Application.");
+            
+            System.Windows.Forms.Timer autoSelectTimer = new() { Interval = 1500 };
+            autoSelectTimer.Tick += (s, ev) =>
+            {
+                autoSelectTimer.Stop();
+                autoSelectTimer.Dispose();
+                
+                RefreshWindowList();
+                
+                foreach (var item in cmbWindow.Items)
+                {
+                    if (item is WindowItem win && (win.Title.Contains("PBS", StringComparison.OrdinalIgnoreCase) || win.Title.Contains("pbscfg", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        cmbWindow.SelectedItem = win;
+                        Log("Automatically selected Hokuyo app window: " + win.Title);
+                        break;
+                    }
+                }
+            };
+            autoSelectTimer.Start();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Failed to launch Hokuyo App:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
     private void RefreshWindowList()
