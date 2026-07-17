@@ -1,0 +1,1 @@
+- **Project Minutes Rule**: Whenever significant progress, structural changes, or important architectural discussions take place, always simultaneously update `Docs/Project_Minutes.md` with a timestamp and a brief summary of what was accomplished.

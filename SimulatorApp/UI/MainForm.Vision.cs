@@ -218,6 +218,10 @@ public partial class MainForm
             
             bool isPositive = confidence > 0.5f;
             
+            // Draw the AI Confidence directly onto the live feed so the user can see it!
+            Scalar aiColor = isPositive ? new Scalar(0, 255, 0) : new Scalar(0, 0, 255);
+            Cv2.PutText(originalFrame, $"AI Confidence: {confidence:P1}", new OpenCvSharp.Point(10, 30), HersheyFonts.HersheySimplex, 0.8, aiColor, 2);
+            
             if (aiVotingQueue.Count >= 10) aiVotingQueue.Dequeue();
             aiVotingQueue.Enqueue(isPositive);
             

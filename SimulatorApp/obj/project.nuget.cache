@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "X/X5ZWYrHgw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\yiron\\Desktop\\FYProject\\SimulatorApp\\OHTPmSimulator_V4.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\yiron\\.nuget\\packages\\microsoft.ml.onnxruntime\\1.27.0\\microsoft.ml.onnxruntime.1.27.0.nupkg.sha512",
+    "C:\\Users\\yiron\\.nuget\\packages\\microsoft.ml.onnxruntime.managed\\1.27.0\\microsoft.ml.onnxruntime.managed.1.27.0.nupkg.sha512",
+    "C:\\Users\\yiron\\.nuget\\packages\\opencvsharp4\\4.13.0.20260627\\opencvsharp4.4.13.0.20260627.nupkg.sha512",
+    "C:\\Users\\yiron\\.nuget\\packages\\opencvsharp4.extensions\\4.13.0.20260602\\opencvsharp4.extensions.4.13.0.20260602.nupkg.sha512",
+    "C:\\Users\\yiron\\.nuget\\packages\\opencvsharp4.runtime.win\\4.13.0.20260627\\opencvsharp4.runtime.win.4.13.0.20260627.nupkg.sha512",
+    "C:\\Users\\yiron\\.nuget\\packages\\opencvsharp4.windows\\4.13.0.20260602\\opencvsharp4.windows.4.13.0.20260602.nupkg.sha512",
+    "C:\\Users\\yiron\\.nuget\\packages\\opencvsharp4.wpfextensions\\4.13.0.20260602\\opencvsharp4.wpfextensions.4.13.0.20260602.nupkg.sha512",
+    "C:\\Users\\yiron\\.nuget\\packages\\system.numerics.tensors\\9.0.0\\system.numerics.tensors.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype Implementation Plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #020617, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #e2e8f0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .presentation-container {
+            width: 90vw;
+            height: 85vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            
+            /* Glassmorphism Card */
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
+
+        .slide.prev {
+            transform: scale(0.95) translateY(-20px);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #94a3b8;
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        li {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #818cf8;
+            font-size: 1.5rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .title-slide {
+            text-align: center;
+            align-items: center;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            font-family: 'Outfit';
+            cursor: pointer;
+            transition: color 0.3s;
+            outline: none;
+        }
+
+        .btn:hover {
+            color: #fff;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #c084fc);
+            transition: width 0.4s ease;
+            border-bottom-left-radius: 24px;
+        }
+
+        /* Numbered lists fix */
+        ol {
+            counter-reset: my-awesome-counter;
+            list-style: none;
+            padding-left: 20px;
+        }
+        ol li {
+            margin-bottom: 20px;
+        }
+        ol li::before {
+            counter-increment: my-awesome-counter;
+            content: counter(my-awesome-counter) ".";
+            color: #818cf8;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container" id="slides-container">
+        
+        <!-- Slide 1 -->
+        <div class="slide title-slide active">
+            <h3>Automated PM Workflow</h3>
+            <h1>Prototype Implementation Plan</h1>
+            <p style="font-size: 1.5rem; color: #94a3b8; margin-top: 20px;">Full-Scale Physical Simulation & Hardware Setup</p>
+            <p style="font-size: 1.2rem; color: #64748b; margin-top: 40px;">Presenter: Tan Yi Rong &nbsp; | &nbsp; July 2026</p>
+            <div class="progress-bar" style="width: 12.5%;"></div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <h2>Prototype Objective</h2>
+            <h3>Moving from Concept to Physical Testing</h3>
+            <ul>
+                <li><strong>The Goal:</strong> Build a small-scale, fully functional physical prototype that perfectly mimics the Overhead Hoist Transport (OHT) sensor environment.</li>
+                <li><strong>Why We Need It:</strong> Before retrofitting 250 vehicles, we must validate the new magnetic connector logic and prove our centralized testing station concept works flawlessly.</li>
+                <li><strong>The Scope:</strong> Automate the physical "Detect / No-Detect" environment to eliminate the need for an engineer to manually stand in front of the sensors.</li>
+            </ul>
+            <div class="progress-bar" style="width: 25%;"></div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h2>Structural Architecture</h2>
+            <h3>The Aluminum Frame & Sensor Mounts</h3>
+            <ul>
+                <li><strong>The Base Structure:</strong> A rigid structure built using standard T-Slot Extruded Aluminum (e.g., 2020 or 3030 series) for maximum modularity and ease of adjustment.</li>
+                <li><strong>Sensor Mounting:</strong> All 4 OHT sensors will be securely mounted to the top beam of the aluminum frame, spaced out to perfectly replicate their actual positions on a real Mark 2 OHT chassis.</li>
+                <li><strong>Calibration:</strong> The frame will be designed to allow slight Z-axis and X-axis adjustments to fine-tune the sensor angles before locking them down.</li>
+            </ul>
+            <div class="progress-bar" style="width: 37.5%;"></div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h2>Automated Obstacle Simulation</h2>
+            <h3>Motorized "Detect / No-Detect" Acrylic Rig</h3>
+            <ul>
+                <li><strong>The Physical Concept:</strong> Instead of an engineer manually blocking the sensors, a large sheet of acrylic will serve as the artificial "obstacle."</li>
+                <li><strong>Distance Accuracy:</strong> The rig will be calibrated to mimic an obstacle exactly <strong>1.5 meters</strong> away from the mounted sensors.</li>
+                <li><strong>Automated Movement:</strong> The acrylic sheet will be programmed to automatically slide Left/Right and Up/Down, triggering the different sensors sequentially to generate live "Detect" and "Clear" data for the PM Workflow Simulator.</li>
+            </ul>
+            <div class="progress-bar" style="width: 50%;"></div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <h2>Required Hardware & Motors</h2>
+            <h3>Mechanical Prototyping Bill of Materials</h3>
+            <ul>
+                <li><strong>Linear Motion:</strong> 2x Linear Guide Rails (with carriage blocks) to ensure the acrylic sheet slides smoothly without vibration.</li>
+                <li><strong>Actuation (Motors):</strong> 2x NEMA 17 Stepper Motors (one for the X-axis, one for the Y-axis) to provide precise, programmable control over the acrylic sheet's position.</li>
+                <li><strong>Drive System:</strong> GT2 Timing Belts and Pulleys connected to the stepper motors to translate rotational movement into linear sliding.</li>
+                <li><strong>The Target:</strong> 1x Matte or Tinted Acrylic Sheet (sized appropriately to block the sensors without reflecting stray light).</li>
+            </ul>
+            <div class="progress-bar" style="width: 62.5%;"></div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <h2>Electrical & Wiring Architecture</h2>
+            <h3>Wiring the Centralized Testing Station</h3>
+            <ul>
+                <li><strong>Motor Control:</strong> An Arduino Uno paired with a CNC Shield and A4988 Stepper Drivers to execute the programmed movement of the acrylic sheet.</li>
+                <li><strong>Sensor Wiring:</strong> The 4 sensors on the aluminum frame will be wired down into the proposed <strong>Centralized Relay Station</strong>.</li>
+                <li><strong>Magnetic Plug Test:</strong> The relay station will route through our prototype PCB Bridge Board, connecting to a sample OEM Magnetic 15-Pin Plug to prove signal integrity.</li>
+                <li><strong>Power Supply:</strong> A dedicated 12V / 24V industrial power supply to drive both the OHT sensors and the stepper motors.</li>
+            </ul>
+            <div class="progress-bar" style="width: 75%;"></div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <h2>Budget Justification</h2>
+            <h3>Prototype Items List & Supervisor Justification</h3>
+            <ul>
+                <li><strong>Items to Purchase:</strong> T-Slot Aluminum Extrusions, 2x NEMA 17 Motors + Rails, Arduino Kit, 4-Channel Relay Module, OEM Magnetic Plug Samples, Acrylic Sheet.</li>
+                <li><strong>Purchase Justification:</strong> Procuring these low-cost Maker components (estimated under SGD 300 total) allows us to physically validate the centralized relay logic and the magnetic plug alignment.</li>
+                <li><strong>ROI (Return on Investment):</strong> This minimal upfront prototyping cost acts as the final proof-of-concept required to unlock our SGD ~42k fleet retrofit strategy, definitively proving to management that a >SGD 100k vision-assisted cobot is entirely unnecessary.</li>
+            </ul>
+            <div class="progress-bar" style="width: 87.5%;"></div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <h2>Full System Integration</h2>
+            <h3>The Grand Vision (The Automated Loop)</h3>
+            <ul>
+                <li><strong>The DIY Coordinate Robot:</strong> I will construct a low-cost Cartesian (coordinate-based) robot arm. Because the magnetic plug is self-aligning, this DIY arm only needs "blind" coordinate movement to plug in and out—<strong>no camera vision is required!</strong></li>
+                <li><strong>The Seamless Loop:</strong> 
+                    <ol>
+                        <li>The DIY arm snaps the magnetic plug into the testing port.</li>
+                        <li>The C# PM Simulator commands the acrylic sheet to move, simulating an obstacle.</li>
+                        <li>As the Simulator successfully detects the obstacle and the "Next Step" button is pressed, the Central Relay instantly switches power to the <em>next</em> sensor.</li>
+                        <li>The acrylic sheet automatically shifts to the new sensor, entirely automating the once-manual PM testing process!</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()">&#8592; Previous</button>
+        <span style="color: #64748b; font-family: 'Outfit'; margin: 0 10px;" id="slide-counter">1 / 8</span>
+        <button class="btn" onclick="nextSlide()">Next &#8594;</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('slide-counter');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+            counter.innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>

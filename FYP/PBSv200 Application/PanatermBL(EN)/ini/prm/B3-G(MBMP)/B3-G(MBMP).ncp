@@ -1,0 +1,116 @@
+#
+#
+#file(C:\prjmmk\mmk\Panaterm\ncp\sample.ncp)
+#Date and time2000/04/12 13:10:43
+#
+#
+#----------------------------------------------
+#ファイルのバージョン
+FILE VERSION,1
+DATA,4,Basic NCP file,"3.05.00"
+END
+#----------------------------------------------
+STEP DATA     ,16           ,#Group name and max. data
+#
+#             ,#Number      ,#Position/Douel time       ,#Acceleration              ,#Deceleation ,#Velocity    ,#Block       #Mode
+DATA          ,0x00         ,281474976710656            ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x01         ,0            ,0            ,0            ,2            ,0            ,0            ,""
+DATA          ,0x02         ,1            ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x03         ,131584       ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x04         ,12935234560  ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x05         ,83886080     ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x06         ,72064191107694592          ,0            ,0            ,1            ,0            ,0            ,""
+DATA          ,0x07         ,504403158265495552         ,0            ,0            ,0            ,0            ,2            ,""
+DATA          ,0x08         ,281474976710656            ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x09         ,0            ,0            ,0            ,2            ,0            ,0            ,""
+DATA          ,0x0A         ,1            ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x0B         ,131584       ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x0C         ,12935234560  ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x0D         ,83886080     ,0            ,0            ,0            ,0            ,0            ,""
+DATA          ,0x0E         ,72064191107694592          ,0            ,0            ,1            ,0            ,0            ,""
+DATA          ,0x0F         ,504403158265495552         ,0            ,0            ,0            ,0            ,2            ,""
+END
+#----------------------------------------------
+POS PARA 16   ,64           ,#Group name and max. data
+#
+DATA          ,0x00         ,32           ,#[0x0020]:1st. velocity
+DATA          ,0x01         ,32           ,#[0x0020]:2nd. velocity
+DATA          ,0x02         ,32           ,#[0x0020]:3rd. velocity
+DATA          ,0x03         ,32           ,#[0x0020]:4th. velocity
+DATA          ,0x04         ,32           ,#[0x0020]:5th. velocity
+DATA          ,0x05         ,32           ,#[0x0020]:6th. velocity
+DATA          ,0x06         ,32           ,#[0x0020]:7th. velocity
+DATA          ,0x07         ,32           ,#[0x0020]:8th. velocity
+DATA          ,0x08         ,32           ,#[0x0020]:9th. velocity
+DATA          ,0x09         ,32           ,#[0x0020]:10th. velocity
+DATA          ,0x0A         ,32           ,#[0x0020]:11th. velocity
+DATA          ,0x0B         ,32           ,#[0x0020]:12th. velocity
+DATA          ,0x0C         ,32           ,#[0x0020]:Select the 13th. velocity
+DATA          ,0x0D         ,32           ,#[0x0020]:14th. velocity
+DATA          ,0x0E         ,32           ,#[0x0020]:15th. velocity
+DATA          ,0x0F         ,32           ,#[0x0020]:16th. velocity
+DATA          ,0x10         ,32           ,#[0x0020]:1st. acceleration
+DATA          ,0x11         ,32           ,#[0x0020]:1st S-shaped acceleration
+DATA          ,0x12         ,32           ,#[0x0020]:1st. deceleration
+DATA          ,0x13         ,32           ,#[0x0020]:1st. S-shaped deceleration
+DATA          ,0x14         ,32           ,#[0x0020]:2nd. acceleration
+DATA          ,0x15         ,32           ,#[0x0020]:2nd. S-shaped acceleration
+DATA          ,0x16         ,32           ,#[0x0020]:2nd. deceleration
+DATA          ,0x17         ,32           ,#[0x0020]:2nd. S-shaped deceleration
+DATA          ,0x18         ,32           ,#[0x0020]:3rd. acceleration
+DATA          ,0x19         ,32           ,#[0x0020]:3rd. S-shaped acceleration
+DATA          ,0x1A         ,32           ,#[0x0020]:3rd. deceleration
+DATA          ,0x1B         ,32           ,#[0x0020]:3rd. S-shaped deceleration
+DATA          ,0x1C         ,32           ,#[0x0020]:4th. acceleration
+DATA          ,0x1D         ,32           ,#[0x0020]:4th. S-shaped acceleration
+DATA          ,0x1E         ,32           ,#[0x0020]:4th. deceleration
+DATA          ,0x1F         ,32           ,#[0x0020]:4th. S-shaped deceleration
+DATA          ,0x20         ,32           ,#[0x0020]:Acceleration of return to the initialize point
+DATA          ,0x21         ,32           ,#[0x0020]:Deceleration of return to the initialize point
+DATA          ,0x22         ,32           ,#[0x0020]:Direction of action to return to the initialize point
+DATA          ,0x23         ,32           ,#[0x0020]:The way of returning to the initialize point
+DATA          ,0x24         ,32           ,#[0x0020]:Action at the time of returning to the initialize point
+DATA          ,0x25         ,32           ,#[0x0020]:reserved
+DATA          ,0x26         ,32           ,#[0x0020]:reserved
+DATA          ,0x27         ,32           ,#[0x0020]:reserved
+DATA          ,0x28         ,32           ,#[0x0020]:reserved
+DATA          ,0x29         ,32           ,#[0x0020]:reserved
+DATA          ,0x2A         ,32           ,#[0x0020]:reserved
+DATA          ,0x2B         ,32           ,#[0x0020]:reserved
+DATA          ,0x2C         ,32           ,#[0x0020]:reserved
+DATA          ,0x2D         ,32           ,#[0x0020]:reserved
+DATA          ,0x2E         ,32           ,#[0x0020]:reserved
+DATA          ,0x2F         ,32           ,#[0x0020]:reserved
+DATA          ,0x30         ,32           ,#[0x0020]:Acceleration of jog action
+DATA          ,0x31         ,32           ,#[0x0020]:Deceleration of jog action
+DATA          ,0x32         ,32           ,#[0x0020]:Direction of jog action
+DATA          ,0x33         ,32           ,#[0x0020]:Direction of positioning command
+DATA          ,0x34         ,32           ,#[0x0020]:Moving volume of console teaching
+DATA          ,0x35         ,32           ,#[0x0020]:reserved
+DATA          ,0x36         ,32           ,#[0x0020]:reserved
+DATA          ,0x37         ,32           ,#[0x0020]:reserved
+DATA          ,0x38         ,0            ,#[0x0000]:reserved
+DATA          ,0x39         ,0            ,#[0x0000]:reserved
+DATA          ,0x3A         ,0            ,#[0x0000]:reserved
+DATA          ,0x3B         ,0            ,#[0x0000]:reserved
+DATA          ,0x3C         ,0            ,#[0x0000]:reserved
+DATA          ,0x3D         ,0            ,#[0x0000]:reserved
+DATA          ,0x3E         ,0            ,#[0x0000]:reserved
+DATA          ,0x3F         ,0            ,#[0x0000]:reserved
+END
+#----------------------------------------------
+POS PARA 32   ,4            ,#Group name and max. data
+#
+DATA          ,0x00         ,1            ,#[0x0000]:Offset of returning to initialize point
+DATA          ,0x01         ,2            ,#[0x0000]:Software limit in the direction of (+)
+DATA          ,0x02         ,3            ,#[0x0000]:Software limit in the direction of (-)
+DATA          ,0x03         ,4            ,#[0x0000]:Sum of pulse at a round
+END
+#----------------------------------------------
+DEF END       ,0
+#
+#
+#
+#end of file
+#
+#

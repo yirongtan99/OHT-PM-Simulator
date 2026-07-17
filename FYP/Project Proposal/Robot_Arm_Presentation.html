@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Arm Project Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #020617, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #e2e8f0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .presentation-container {
+            width: 90vw;
+            height: 85vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            
+            /* Glassmorphism Card */
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 70px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
+
+        .slide.prev {
+            transform: scale(0.95) translateY(-20px);
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            font-weight: 400;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        li {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #818cf8;
+            font-size: 1.4rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        /* Beautiful Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        th {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        tr:hover {
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .title-slide {
+            text-align: center;
+            align-items: center;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            font-family: 'Outfit';
+            cursor: pointer;
+            transition: color 0.3s;
+            outline: none;
+        }
+
+        .btn:hover {
+            color: #fff;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #c084fc);
+            transition: width 0.4s ease;
+            border-bottom-left-radius: 24px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container" id="slides-container">
+        
+        <!-- Slide 1 -->
+        <div class="slide title-slide active">
+            <h3>OHT Mark 2 PM Workflow Simulator</h3>
+            <h1>Robot Arm Project Proposal</h1>
+            <p style="font-size: 1.5rem; color: #94a3b8; margin-top: 20px;">Feasibility, Vendor Comparison, and Engineering Alternatives</p>
+            <p style="font-size: 1.2rem; color: #64748b; margin-top: 40px;">Presenter: Tan Yi Rong &nbsp; | &nbsp; July 2026</p>
+            <div class="progress-bar" style="width: 12.5%;"></div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <h2>Project Objective</h2>
+            <h3>Automating the PM Process</h3>
+            <ul>
+                <li><strong>Current State:</strong> The Preventive Maintenance (PM) sensor connection is manual, labour-intensive, and prone to human error.</li>
+                <li><strong>Proposed Solution:</strong> Integrate a Collaborative Robot (Cobot) arm to automatically handle the sensor plug connection to the Overhead Hoist Transport (OHT).</li>
+                <li><strong>Goal:</strong> Reduce operational downtime, eliminate manual alignment errors, and enable a fully automated, vision-assisted PM workflow.</li>
+            </ul>
+            <div class="progress-bar" style="width: 25%;"></div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h2>Vendor Comparison</h2>
+            <h3>Market Feasibility & Hardware Evaluation</h3>
+            <table>
+                <tr>
+                    <th>Criteria</th>
+                    <th>OMRON (TM5S Series)</th>
+                    <th>Universal Robots (UR7e)</th>
+                    <th>ABB (GoFa / POWA)</th>
+                </tr>
+                <tr>
+                    <td><strong>Price Quotation</strong></td>
+                    <td><strong>SGD 100k – 150k</strong></td>
+                    <td><strong>~SGD 29k – 36k</strong></td>
+                    <td><strong>SGD 40k – 70k</strong> / <$30k</td>
+                </tr>
+                <tr>
+                    <td><strong>Maximum Reach</strong></td>
+                    <td>900 mm</td>
+                    <td>~730mm - 1300mm</td>
+                    <td>Up to 950mm</td>
+                </tr>
+                <tr>
+                    <td><strong>Operating Speed</strong></td>
+                    <td>1.4 m/s</td>
+                    <td>Up to 1.0 m/s</td>
+                    <td>Up to 2.2 m/s</td>
+                </tr>
+                <tr>
+                    <td><strong>Safety Factor</strong></td>
+                    <td>Advanced collision</td>
+                    <td>17 configurable functions</td>
+                    <td>Advanced torque sensors</td>
+                </tr>
+                <tr>
+                    <td><strong>Vision System</strong></td>
+                    <td><strong>Built-in / Integrated</strong></td>
+                    <td>Without camera</td>
+                    <td>Requires specific add-ons</td>
+                </tr>
+            </table>
+            <p style="color: #94a3b8; font-size: 1.1rem; font-style: italic;">Takeaway: The extreme budget constraints require us to explore internal engineering alternatives instead of procuring premium hardware.</p>
+            <div class="progress-bar" style="width: 37.5%;"></div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h2>The Core Challenge</h2>
+            <h3>The Budgetary & Vision Hurdle</h3>
+            <ul>
+                <li><strong>The Problem:</strong> The primary driver of the high vendor quotations is the requirement for a highly precise <strong>Robot Vision System</strong>.</li>
+                <li><strong>Why Vision is Needed:</strong> The current OHT sensor uses a complex <strong>4-port plug</strong>. A robot arm without a camera cannot accurately align and insert a 4-pin connector just by "feel".</li>
+                <li><strong>The Crossroads:</strong> Do we heavily increase the project budget for vision-assisted robots, or do we redesign the hardware to eliminate the need for vision entirely?</li>
+            </ul>
+            <div class="progress-bar" style="width: 50%;"></div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <h2>Hardware Redesign</h2>
+            <h3>The DIY Magnetic Connector Solution</h3>
+            <ul>
+                <li><strong>The Concept:</strong> Replace the complex 4-port plug with a <strong>centralized single magnetic connector</strong>.</li>
+                <li><strong>Eliminating Vision:</strong> Magnetic connectors auto-align themselves via magnetic pull. A low-cost, DIY robot arm only needs to bring the plug <em>close</em> to the port, and magnets will snap it into perfect alignment automatically.</li>
+                <li><strong>Cost Efficiency:</strong> This drastically drops the robotics budget, allowing us to build an in-house DIY arm.</li>
+            </ul>
+            <div class="progress-bar" style="width: 62.5%;"></div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <h2>Fleet Retrofit Cost Analysis</h2>
+            <h3>Implementation Considerations for 250 OHT Vehicles</h3>
+            <table>
+                <tr>
+                    <th>Component / Requirement</th>
+                    <th>Est. Unit Cost</th>
+                    <th>Total Cost</th>
+                </tr>
+                <tr>
+                    <td><strong>Magnetic 15-Pin Plug</strong> (Premium Rosenberger)</td>
+                    <td>SGD 70</td>
+                    <td><strong>SGD 17,500</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Magnetic 15-Pin Plug</strong> (Cheaper OEM Alternative)</td>
+                    <td>~SGD 15</td>
+                    <td><em>(~SGD 3,750)</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Custom PCB Breakout & Relays</strong></td>
+                    <td>~SGD 8</td>
+                    <td><strong>~SGD 2,000</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Mounting Brackets & Labor</strong></td>
+                    <td>~SGD 95</td>
+                    <td><strong>~SGD 23,750</strong></td>
+                </tr>
+                <tr style="border-top: 2px solid #38bdf8;">
+                    <td><strong>GRAND TOTAL (Premium Plug)</strong></td>
+                    <td>-</td>
+                    <td><strong>~SGD 42,550</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>GRAND TOTAL (Cheaper OEM Plug)</strong></td>
+                    <td>-</td>
+                    <td><strong style="color:#50fa7b;">~SGD 28,800</strong></td>
+                </tr>
+            </table>
+            <div class="progress-bar" style="width: 75%;"></div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <h2>Magnetic Connector Sourcing</h2>
+            <h3>Hardware Sourcing & Installation</h3>
+            <table>
+                <tr>
+                    <th>Manufacturer / Brand</th>
+                    <th>Connector Quality</th>
+                    <th>Est. Unit Price</th>
+                </tr>
+                <tr>
+                    <td><strong>Rosenberger (Germany)</strong></td>
+                    <td>Premium / Aerospace Grade</td>
+                    <td>~SGD 70.00</td>
+                </tr>
+                <tr>
+                    <td><strong>C.C.P. Contact Probes (Taiwan)</strong></td>
+                    <td>High Industrial Grade</td>
+                    <td>~SGD 25.00</td>
+                </tr>
+                <tr>
+                    <td><strong>HytePro / Top-Link (China)</strong></td>
+                    <td>Standard OEM Pogo-Pin</td>
+                    <td>~SGD 15.00</td>
+                </tr>
+            </table>
+            <ul>
+                <li><strong>The Bridge Board:</strong> We will design a tiny, custom PCB (SGD 3 each) to seamlessly map the magnetic pins to our standard wires.</li>
+            </ul>
+            <div class="progress-bar" style="width: 87.5%;"></div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <h2>Next Steps & Conclusion</h2>
+            <h3>Moving Forward</h3>
+            <ul>
+                <li>Finalize the budget review and formally reject the current OMRON / UR / ABB vendor quotations.</li>
+                <li>Draft the electrical schematic for the proposed central testing station relay circuit.</li>
+                <li>Procure sample magnetic connectors from OEM manufacturers to test alignment strength.</li>
+                <li><strong>Conclusion:</strong> By intelligently redesigning the physical connector and centralizing the relay logic, we bypass expensive robot vision requirements and achieve massive cost savings for the automation project.</li>
+            </ul>
+            <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()">&#8592; Previous</button>
+        <span style="color: #64748b; font-family: 'Outfit'; margin: 0 10px;" id="slide-counter">1 / 8</span>
+        <button class="btn" onclick="nextSlide()">Next &#8594;</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('slide-counter');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+            counter.innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
