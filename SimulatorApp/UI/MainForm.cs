@@ -290,7 +290,7 @@ public partial class MainForm : Form
 
     private void LoadAiModel()
     {
-        string modelPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "AI_Model", "oht_sensor_model.onnx");
+        string modelPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "FYP", "AI_Model", "oht_sensor_model.onnx");
         if (File.Exists(modelPath))
         {
             try

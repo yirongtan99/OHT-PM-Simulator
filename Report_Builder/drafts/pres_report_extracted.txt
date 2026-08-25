@@ -1,0 +1,336 @@
+# Presentation Report — Full Slide Contents
+
+---
+
+## Slide 1
+
+Professional Attachment '26
+Tan Yi Rong | Equipment Engineer Intern | F7 AMHS
+Date: May 25, 2026 – Aug 7, 2026
+
+GlobalFoundries Confidential
+Any hard and soft copy out of the Document Management System deemed as uncontrolled
+
+---
+
+## Slide 2
+
+Project ODIN
+Calibrating the sensor
+Creating a software app for data
+01
+FYP Research & Findings
+Exploring project scope
+Cost Findings
+02
+
+---
+
+## Slide 3
+
+# Project ODIN
+
+PRIMARY GOAL
+Develop an automated sensor-based monitoring system that measures OHT wheel wear condition in real-time to enable predictive maintenance and reduce unplanned downtimes.
+Continuous Monitoring
+The sensor captures live profile data of each wheel.
+Any wear and tear over time will increase the height difference.
+Data is logged for trend analysis for a predictive maintenance.
+1st Detection
+LiDAR Sensor
+Direction of OHT
+Laser
+Continuous Scanning
+Highest Point
+1st Wheel
+2nd Wheel
+Track
+
+---
+
+## Slide 4
+
+# Project ODIN CAD design
+Overhead Hoist Transport (OHT)
+
+Exact placement and mounting layout on OHT track
+
+---
+
+## Slide 5
+
+# Project ODIN Layout
+Power Supply
+Ethernet Connectivity
+Slave Amplifier Controller (Left)
+Master Amplifier Controller (Right)
+Circuit Breaker
+
+---
+
+## Slide 6
+
+# Testing Phase
+LiDAR Sensor
+
+Measured the difference from the Original Wheel size of 125mm
+Real Time Testing to simulate OHT running pass sensor
+Detecting Highest point of the wheel
+
+---
+
+## Slide 7
+
+# Part 1: Project ODIN
+
+OBJECTIVE
+Support Predictive Maintenance (PdM) through wheel condition monitoring.
+01 Identify — Focused on identifying parameters for accurate PdM data collection
+02 Execute — Executed continuous sensor testing to collect wheel measurement data
+03 Validate — Validated sensor outputs to ensure they accurately reflected wheel degradation over time
+
+---
+
+## Slide 8
+
+# Live Monitoring UI
+
+Real-Time Data: Dashboard displaying live sensor reading with latest OHT No.
+
+---
+
+## Slide 9
+
+# Fleet Overview UI
+
+Overview Tracking: Displays the current status of the entire OHT fleet
+Warning Flag: Highlights which vehicles are due for preventive maintenance
+
+---
+
+## Slide 10
+
+# OHT Analysis UI
+
+Trend Analysis: Graphs how wheel degradation progresses over weeks and months
+Predictive Insights: Forecasts when specific wheels will fail, enabling pre-emptive parts replacement rather than reactive maintenance
+
+---
+
+## Slide 11
+
+# Side-By-Side Wheel Comparison
+
+Wheel Comparison: Enables detailed analysis of each wheel's degradation state for further investigation
+
+---
+
+## Slide 12
+
+# Part 2: FYP Research & Feasibility
+
+OBJECTIVE
+Automate the repetitive and manual OHT Mark 2 Sensor PM Process
+The current preventive maintenance (PM) process validates that the OHT sensors are functioning correctly and are within acceptable operating specifications before the unit is released for operation.
+PURPOSE OF TESTING — What the PM process needs to confirm before an OHT returns for operation
+01 Verify waveform and detection performance
+02 Confirm readings are within required specification
+03 Ensure safe braking / obstacle detection performance
+04 Record proof of passing result before OHT is returned for operation
+
+---
+
+## Slide 13
+
+VHL using Reflective Plate
+OBS Right — Removable Reflective Plate
+OBS Left
+RN = VHL | JNR = OBS Right | JNL = OBS Left | JNC = OBS Center
+10-pin male cable
+Panel — OBS Center
+Manual plugging and shifting of data port between sensors
+Manual shifting of Panel
+VHL – VeHicLe Sensor
+OBS – OBStacle Sensor
+
+---
+
+## Slide 14
+
+# Current PM Workflow
+1 — Once finish VHL, remove reflective plate
+2 — Shift panel to Left Side for No detect, then to right for Detect
+For VHL — Adjust shifting of Panel
+3 — Shift panel to Right Side for No detect, then to Left for Detect
+4 — Shift panel down for No Detect, then raise it up for Detect
+For OBS Left / For OBS Right / For OBS Center
+Plug port in from left to right sequence
+Ensure sensors are in correct specification, else manually adjust sensor position.
+Once good, screenshot and upload readings
+Change port when individual sensor readings are captured
+Repeat Sequence from 1 to 4
+
+---
+
+## Slide 15
+
+# Current Manual Process Challenges
+PAIN POINTS IN THE EXISTING METHOD
+The current workflow is effective, but it is highly dependent on manual execution.
+Key challenges
+- Repeated plugging and unplugging between ports
+- Manual panel / reflective target shifting
+- Repeated checking of G / NG result
+- Manual sensor adjustment if out of specification
+- Manual screenshot capture and upload
+- Process consistency depends heavily on technician skill and alignment accuracy
+Impact
+- Time-consuming PM process
+- Repetitive work for line support technicians
+- Possibility of variation between operators
+- Difficult to scale if PM demand increases
+- Manual documentation adds extra workload
+
+---
+
+## Slide 16
+
+# Project Objective
+CURRENT STATE
+The PM sensor connection is manual, labour-intensive and prone to human error.
+PROPOSED SOLUTION
+Integrate a Collaborative Robot (Cobot) arm to automatically handle the sensor data cable plug connection to the OHT.
+GOAL
+Reduce operational downtime, eliminate manual alignment errors and enable a fully automated, vision-assisted PM workflow.
+
+---
+
+## Slide 17
+
+# Cobot & Vision Candidates
+Omron TM series
+UR7e
+ABB GoFa
+ABB PoWa
+
+SICK Smart Vision Guidance
+PLOC2D-631C robot guidance with V3D structured-light sensor (~SGD 5,029)
+Detects plug position so the cobot aligns and connects automatically
+Video demo: PLOC2D-631C | SICK
+
+---
+
+## Slide 18
+
+# Vendor Comparison
+| Criteria | OMRON (TM5S) | Universal Robots (UR7e) | ABB (GoFa) | ABB (PoWa) |
+| --- | --- | --- | --- | --- |
+| Price Range | SGD 100k - 150k | ~SGD 29k - 36k | ~SGD 30k (GoFa13) ~SGD 20k (GoFa5) | ~SGD 20K (PoWa13) ~SGD 15K (PoWa7) |
+| Reach | 900 mm | 850 mm | Up to 1300mm Up to 950mm | Up to 1300mm Up to 900mm |
+| Weight (arm) | ~23.6 kg | ~20.7 kg | ~48 kg (GoFa 12) | ~41 kg (PoWa 13) |
+| Speed | 1.4 m/s | Up to 4 m/s | Up to 2.2 m/s | Up to 5.8m/s |
+| Safety | Advanced collision | 17 configurable functions | Advanced torque sensors – all 6 axis | SafeMove (current monitoring) |
+| Vision | Built-in / Integrated | Third Party | Third Party ~SGD 5k (SICK Smart Vision) | Third Party Supports plug-and-play flange integration |
+| Additional Add-ons | 2x Landmark (~SGD 20); realign OHT ports. | Retrofit port to magnetic plug; vision-guided. | Retrofit port to magnetic plug; vision-guided. | Retrofit port to magnetic plug; minimal deviation. |
+
+---
+
+## Slide 19
+
+# Magnetic Connector for Retrofit
+Rosenberger MultiMag 15 (15-way, from RS) • ~SGD 62–67
+CFE CXA-0241 (12-pin magnetic) • quote on request
+CLE CFA-0241 (12-pin magnetic) • quote on request
+Magnetic pogo-pin (8–12P) • ~SGD 3.69/unit
+
+---
+
+## Slide 20
+
+# Retrofit Cost Analysis (304 Vehicles)
+| Component / Requirement | Est. Unit Cost | Total Cost |
+| --- | --- | --- |
+| Magnetic 15-Pin Plug (Premium Rosenberger) from RS | ~SGD 70 | ~SGD 21,280 |
+| Magnetic Pogo-Pin Plug (Budget Alternative) | ~SGD 4 | ~SGD 1,216 |
+| Custom PCB Bridge Board (per OHT) | ~SGD 3 | ~SGD 912 |
+| GRAND TOTAL (Premium Plug) | - | ~SGD 22,192 |
+| GRAND TOTAL (Budget Plug) | - | ~SGD 2,128 |
+
+Plus one-time retrofit labor (304 OHTs)
+1 hr per OHT × 304 = 304 hrs  •  AE rate ~$18.03 USD/hr ($45k/yr, 4 days/wk @ 12 hrs)  •  Est. labor cost ~$5,481 USD (~SGD 7,344)
+Estimated rollout timeline
+~51–76 working days (~2.5–4 months) at a pace of 4–6 OHTs/day  •  paced by daily release, not labor capacity (~4–6 hrs/day)
+
+---
+
+## Slide 21
+
+# Magnetic Sourcing & PCB Implementation
+| Manufacturer / Brand | Connector Quality | Est. Unit Price |
+| --- | --- | --- |
+| MultiMag 15, Straight Panel 15 way Magnetic Connector, Brass Contact, PCB | Rosenberger from RS | ~SGD 70.00 |
+| [CXA-0241] 12 pin magnetic charging cable connector | CFE Electronic Co.,Ltd | ~To be enquired |
+| [CFA-0241] 12 Pin magnetic charging cable connector | CLE TECH CO.,LTD | ~To be enquired |
+| 12V 3A Magnetic Pogo Pin Connector 8P-12P Male Female Socket | Standard Pogo-Pin | ~SGD 4.00 |
+The Bridge Board: We will design a tiny, custom PCB (~SGD 3 each) to seamlessly map the magnetic pins to our standard wires.
+
+---
+
+## Slide 22
+
+# Connection: Magnetic Plug & Relay Station
+ON THE OHT — RELAY SWITCH — PCB
+Relay · VHL — VHL Sensor · 10-pin port
+Min. 12-PIN MAGNETIC PLUG on the OHT
+MAGNETIC PLUG at the workstation
+Laptop/Desktop Workstation
+Relay · OBS Right — 2-PIN JUMPER — OBS Right · 10-pin port
+Relay · OBS Left — OBS Left · 10-pin port
+Relay · OBS Center — OBS Center · 10-pin port
+Switch selects one sensor at a time
+5 of 10 pins used each
+Inside each 10-pin port — only 5 pins used
+How it works
+A single 12-pin magnetic plug on the OHT carries all four sensors' signals (3 each). At the workstation, a 2-pin jumper feeds a relay-switch bank that connects one sensor at a time.
+This reproduces the manual plug-in / plug-out routine from one fixed station, no repeated unplugging between ports.
+3 signal pins — a unique colour per sensor
+2 jumper pins (blue)
+5 pins unused
+
+---
+
+## Slide 23
+
+# The Verdict
+OMRON (TM5S) — NOT SELECTED
+Pro: Excellent out-of-the-box vision integration
+Con: Severely breaks the budget at >SGD 100k
+Con: Only saves 10 min per PM — weak cost-to-benefit
+ABB Series ★ RECOMMENDED
+Pro: Highly cost-effective ~SGD 20K
+Pro: Flexible 6-axis, configurable functions
+Con: Needs 3rd-party vision plugin (e.g., SICK)
+RECOMMENDED PATH
+The current 4-port plug is too difficult for basic vision systems. Purchase a cost-effective ABB / UR cobot and retrofit the fleet with magnetic plugs (alignment by feel), accounting for the one-time ~SGD 7,344 manpower retrofit cost.
+
+---
+
+## Slide 24
+
+# Return on Investment
+~3.0 yr — Payback / breakeven period — SGD 30k investment ÷ SGD 10.1k saved/yr
+~SGD 10.1k — Manpower cost saved per year — 416 technician hrs/yr at SGD 24.34/hr
+416 hrs — Technician time saved yearly — 30 min × 4 OHTs/day × 208 days
+Value beyond direct labor
+- Prevents costly port damage from forced manual connections
+- Eliminates human verification errors on every PM
+- Frees strict technician time for higher-value maintenance
+Investment vs alternative
+~SGD 30k our recommended path vs SGD 150k for OMRON — ~1/5th the cost, same outcome
+Basis: total investment ~SGD 30k (magnetic plug + install manpower + misc) ÷ annual manpower saved ~SGD 10.1k. Savings = 30 min × 4 OHTs/day × 208 workdays at SGD 24.34/hr (line-support salary USD 45k/yr × 1.35, 4 days/wk @ 12 hrs).
+
+---
+
+## Slide 25
+
+(Image-only slide — no text content)

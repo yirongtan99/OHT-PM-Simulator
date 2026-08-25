@@ -296,7 +296,7 @@ public partial class MainForm
         captureWindows.Clear();
         NativeMethods.EnumWindows((hWnd, lParam) =>
         {
-            if (!NativeMethods.IsWindowVisible(hWnd) || hWnd == Handle) return true;
+            if (!NativeMethods.IsWindowVisible(hWnd) || (IsHandleCreated && hWnd == Handle)) return true;
             int len = NativeMethods.GetWindowTextLength(hWnd);
             if (len <= 0) return true;
             var sb = new StringBuilder(len + 1);

@@ -1,158 +1,230 @@
-# Final Internship Report
+# Automating Preventive Maintenance for OHT Obstacle Detection Sensors in a Semiconductor Fab Environment
 
 **Author:** Tan Yi Rong
 **Matriculation Number:** U2320967K
+**Supervisor:** [To Be Added]
+**School / Programme:** [To Be Added]
 **Company:** GlobalFoundries Singapore
 **Department:** F7 Automated Material Handling System (AMHS)
-**Role:** Equipment Engineer Intern
-**Attachment Period:** May 25, 2026 – Aug 7, 2026 (11 Weeks)
-**Date:** [Insert Submission Date]
+**Academic Year:** 2026/2027
+**Submission Date:** [To Be Added]
+
+---
+
+## Acknowledgements
+
+_To be written._
 
 ---
 
 ## Abstract
 
-This report documents the work done during an 11-week Professional Attachment at GlobalFoundries Singapore, within the F7 Automated Material Handling System (AMHS) department. Two workstreams ran concurrently throughout the attachment. The first and primary focus was Project Odin — a sensor-based initiative designed to replace the manual, vernier caliper-based wheel measurement process currently performed by line support during OHT Preventive Maintenance (PM), with a consistent and automated displacement sensor system. The second was the early-stage feasibility study for a Final Year Project (FYP), exploring a phased approach to automating the manual PM workflow for OHT Mark 2 obstacle detection sensors. This report covers the problem being solved, the sensing approach, physical setup, calibration, testing, and future implementation plan for Project Odin, followed by a summary of the vendor research, cost analysis, and the three-phase automation roadmap for the FYP.
+This report documents the feasibility study and phased automation approach for a Final Year Project (FYP) conducted in collaboration with GlobalFoundries Singapore's F7 Automated Material Handling System (AMHS) department. The project aims to automate the highly manual Preventive Maintenance (PM) workflow for Overhead Hoist Transport (OHT) Mark 2 obstacle detection sensors. By evaluating hardware alternatives, the project pivots from an expensive vision-based robotic solution to a cost-effective mechanical redesign using self-aligning magnetic connectors. This report covers the problem statement, the engineering design alternatives considered, the three-phase automation roadmap, and the projected return on investment for the recommended solution.
 
 ---
 
-## 1. Introduction & Background
+## Table of Contents
 
-GlobalFoundries operates an extensive Automated Material Handling System (AMHS) in its F7 fabrication facility. The Overhead Hoist Transport (OHT) fleet moves wafers across the cleanroom automatically, running continuously throughout production. Keeping these vehicles in good working order requires regular Preventive Maintenance carried out by the line support team — the technicians responsible for day-to-day maintenance and servicing of the OHT fleet.
-
-Two related problems were identified going into this attachment. The first was with how OHT wheel measurements were being captured during PM. The second was with the manual, judgment-dependent process used to verify the OHT obstacle detection sensors. Both share a common root cause — over-reliance on individual technician execution, which introduces variability and inconsistency into what should be a standardised process.
-
-Project Odin addressed the first problem. The FYP feasibility study focused on the second, laying out a phased automation roadmap to reduce manual steps in the sensor PM workflow.
+_To be generated upon completion._
 
 ---
 
-## 2. Project Odin — OHT Wheel Wear Monitoring
+## List of Figures
 
-### 2.1 The Problem with the Current Method
-
-As part of the existing PM process, line support is required to measure the diameter of each OHT wheel using a vernier caliper. While this is a standard measurement tool, applying it consistently in a busy maintenance environment is harder than it sounds.
-
-The measurement outcome varies depending on how the caliper is positioned, how much pressure is applied, and how experienced the person doing it is. Different line support staff measure slightly differently, and this results in data that is inconsistent between technicians. A more telling sign of the problem is that the recorded data sometimes shows wheel diameters increasing over time — which physically does not make sense, since a wheel can only wear down, not grow. This pattern in the data is a clear indicator that the measurements are being affected by human error rather than reflecting the actual condition of the wheels.
-
-The consequence of this is that the data collected through the current method cannot be relied upon for any meaningful trend analysis. There is no clean baseline to compare against, and decisions about wheel replacement are still largely based on schedule or visual inspection rather than actual measured wear.
-
-### 2.2 Objective
-
-Project Odin was brought in to solve this directly. The goal is to replace the vernier caliper measurement step with a sensor-based system that captures wheel diameter automatically and consistently every time an OHT passes through the measurement station — removing the human variable from the equation entirely.
-
-With a reliable, repeatable dataset in place, the department will eventually be able to move from scheduled wheel replacement to a predictive maintenance model — where replacement decisions are driven by actual measured wear data rather than fixed time intervals.
-
-### 2.3 How the Sensing Works
-
-The system uses a displacement sensor mounted in a fixed position above the OHT track, facing downward. As an OHT rolls beneath it, the sensor continuously scans the surface below, capturing distance readings in real time as the wheel passes through its field of view.
-
-What the sensor captures across each pass is not just a single reading — it is a profile of the wheel's curvature as it moves underneath. The reading starts shallow at the leading edge of the wheel, climbs as the highest point of the wheel comes into range, then drops back down as the wheel exits. This produces a curve of distance measurements for each pass.
-
-From this curve, the system selects the highest valued data point — the peak of the curvature, which corresponds to the closest the wheel surface gets to the sensor. This is the most representative value of the wheel's current diameter.
-
-The final calculation is:
-
-> **Wheel Diameter = 125mm − Peak Reading**
-
-The sensor is calibrated against a reference wheel with a known diameter of 125mm. At this reference, the peak reading is 0mm. As a wheel wears and its diameter shrinks, it sits slightly lower on the track, causing the peak reading to increase — and the calculated diameter to drop below 125mm. Wheels measuring at or below 123mm are flagged for replacement, representing a 2mm reduction from the healthy baseline.
-
-### 2.4 Physical Setup
-
-The installation on the track consists of the following components:
-
-- **Displacement Sensor (LiDAR)** — Mounted above the track, facing downward. Scans continuously as each OHT rolls beneath it.
-- **Master Amplifier Controller** — Processes the primary sensor signal.
-- **Slave Amplifier Controller** — Mirrors the data for the secondary channel, allowing future dual-sensor coverage.
-- **Ethernet Connectivity** — Links the controllers to the data collection system.
-- **Power Supply Unit** — Provides stable power to the sensor and controllers.
-- **Circuit Breaker** — For safe isolation of the setup.
-
-The layout is compact and sits unobtrusively on the track without disrupting normal OHT operations.
-
-### 2.5 Calibration & Testing
-
-Before data collection could start, the sensor was calibrated against a reference wheel with a confirmed diameter of 125mm. This set the zero point for the system, making all subsequent readings relative to that known baseline.
-
-Testing was done by physically rolling a wheel beneath the sensor to simulate an OHT pass. The main things being verified were that the system could correctly detect the start and end of a wheel pass, capture the full profile curvature across the pass, and reliably select the peak value.
-
-Several rounds of threshold adjustment were needed before the detection was consistently stable. The challenge was making sure the sensor only triggered on actual wheels and not on background objects or noise at track level. Once the thresholds were set correctly, the system produced reliable results across repeated test runs, and the calculated diameter values matched manual reference measurements taken alongside.
-
-### 2.6 Data Collected
-
-Each time an OHT passes the sensor station, the system logs one record containing:
-
-- Timestamp of the wheel pass
-- OHT vehicle number
-- Measured diameter for each of the four wheel positions — Front Left (FL), Front Right (FR), Back Left (BL), and Back Right (BR)
-
-In the current prototype stage, only one physical sensor is deployed. The four-wheel data is generated using the single sensor's reading as the primary value, with minor simulated variation added for the other three positions. This is a temporary measure to allow the data structure and logging framework to be fully validated before full deployment.
-
-### 2.7 Future Implementation
-
-The current setup is a validated prototype. Deploying it properly for fleet-wide use involves a few more steps.
-
-The immediate next step is to move the sensor system into the maintenance room inside the fab — the controlled space where OHTs are brought in for scheduled PM. This is the most practical deployment location because every OHT that comes in for PM will naturally pass through the measurement station, ensuring regular readings for every vehicle without any additional process burden on the line support team.
-
-From there, the focus shifts to building up a larger dataset over time. A single measurement every five to six months per vehicle is not enough to draw reliable wear trend conclusions. The dataset needs to grow across multiple PM cycles for a significant portion of the fleet before patterns become clear — such as which vehicles wear faster, which wheel positions degrade first, or whether specific operating routes or track sections accelerate wear.
-
-The key challenge in doing this accurately at scale is vehicle identification. Currently, tagging each measurement to the correct OHT number still requires a manual input step. To make this seamless and error-free, the planned next development for Project Odin is to integrate an **RFID tagging component** into the system. Each OHT already has a unique identifier, and a reader positioned alongside the sensor would automatically pick up the vehicle's tag as it passes — ensuring every measurement is correctly attributed without any manual input.
-
-Once RFID tagging is in place and the dataset is large enough, the system will be positioned to support genuine predictive maintenance, where specific vehicles can be flagged for wheel replacement based on their actual measured wear trajectory rather than a fixed service schedule.
+_To be added._
 
 ---
 
-## 3. FYP Research & Feasibility — Automating the OHT Sensor PM
+## List of Tables
 
-### 3.1 Background & Problem Statement
+_To be added._
 
-The PM process for the OHT Mark 2 obstacle detection sensors is one of the more involved maintenance tasks that the line support team handles. This PM is critical from a safety standpoint — the sensors being tested are responsible for detecting obstacles in the OHT's path and triggering the vehicle to stop before any collision occurs. Getting the PM right matters.
+---
 
-The sensors covered in each PM cycle are the Vehicle Detection Sensor (VHL) and three obstacle sensors — OBS Left, OBS Right, and OBS Center.
+## 1. Introduction
 
-The current process works as follows: line support connects a data cable to the first sensor port and opens the Hokuyo application on a laptop to view the sensor's live waveform reading. Based on what they see on screen, they assess whether the sensor is within the acceptable operating range. If it is within spec, they take a screenshot of the waveform and document it. If it is not, they manually adjust the physical position of the sensor and recheck until the reading is within range. If the sensor cannot be brought into spec even after adjustment, it is swapped out for a replacement unit and the verification is repeated from the start.
+### 1.1 Background
 
-This is done for each of the four sensors in turn, which means the data cable has to be physically unplugged from one port and plugged into the next, repeatedly across the session. On top of this, line support also has to manually shift a panel or reflective plate in front of each sensor to simulate an obstacle being present — then check that the sensor correctly registers the detection — before shifting the panel away again to confirm the sensor clears. This is done to verify both the detection and non-detection states for each sensor.
+GlobalFoundries operates an extensive Automated Material Handling System (AMHS) in its F7 fabrication facility. The Overhead Hoist Transport (OHT) fleet moves wafers across the cleanroom automatically, running continuously throughout production. Keeping these vehicles in good working order requires regular Preventive Maintenance carried out by the line support team, the technicians responsible for day-to-day maintenance and servicing of the OHT fleet.
 
-Each full PM cycle takes around one hour per OHT, and the team handles about four OHTs per day. The process is effective, but the reliance on individual technician judgment — both in reading the waveform and in shifting the panel — introduces variability. Whether a waveform is "within spec" depends on the person looking at it, and the consistency of panel positioning from one technician to the next is not guaranteed. These are the gaps the FYP aims to close.
+A significant challenge identified was the manual, judgment-dependent process used to verify the OHT obstacle detection sensors. The root cause of inefficiencies in this process is an over-reliance on individual technician execution, which introduces variability and inconsistency into what should be a standardised safety procedure. This project lays out a phased automation roadmap to eliminate manual steps and standardize the sensor PM workflow.
 
-### 3.2 Phased Automation Roadmap
+### 1.2 Problem Statement
 
-Rather than trying to automate everything at once, the FYP adopts a phased approach that addresses the most impactful manual steps first and builds towards a fully integrated solution over time.
+The PM process for the OHT Mark 2 obstacle detection sensors is one of the more involved maintenance tasks that the line support team handles. This PM is critical from a safety standpoint. The sensors being tested are responsible for detecting obstacles in the OHT's path and triggering the vehicle to stop before any collision occurs. Getting the PM right matters.
+
+The sensors covered in each PM cycle are the Vehicle Detection Sensor (VHL) and three obstacle sensors, which are OBS Left, OBS Right and OBS Center.
+
+The current process works as follows. Line support connects a data cable to the first sensor port and opens the Hokuyo application on a laptop to view the sensor's live waveform reading. Based on what they see on screen, they assess whether the sensor is within the acceptable operating range. If it is within spec, they take a screenshot of the waveform and document it. If it is not, they manually adjust the physical position of the sensor and recheck until the reading is within range. If the sensor cannot be brought into spec even after adjustment, it is swapped out for a replacement unit and the verification is repeated from the start.
+
+This is done for each of the four sensors in turn, which means the data cable has to be physically unplugged from one port and plugged into the next, repeatedly across the session. On top of this, line support also has to manually shift a panel or reflective plate in front of each sensor to simulate an obstacle being present, then check that the sensor correctly registers the detection, before shifting the panel away again to confirm the sensor clears. This is done to verify both the detection and non-detection states for each sensor.
+
+Each full PM cycle takes around one hour per OHT and the team handles about four OHTs per day. The process is effective, but the reliance on individual technician judgment, both in reading the waveform and in shifting the panel, introduces variability. Whether a waveform is "within spec" depends on the person looking at it and the consistency of panel positioning from one technician to the next is not guaranteed. 
+
+### 1.3 Project Objectives
+
+_To be written._
+
+### 1.4 Scope and Limitations
+
+_To be written._
+
+### 1.5 Report Organisation
+
+_To be written._
+
+### 1.6 Project Timeline
+
+The FYP runs from August 2026 to April 2027. The timeline below outlines the planned phases, milestones and report writing schedule across the full duration.
+
+```mermaid
+gantt
+    title FYP Project Timeline — Aug 2026 to Apr 2027
+    dateFormat YYYY-MM-DD
+    axisFormat %b '%y
+
+    section Planning & Setup
+    FYP scope finalisation & supervisor meetings      :p1, 2026-08-01, 2026-08-31
+    Initial report structure setup                   :done, p2, 2026-07-27, 2026-07-27
+
+    section Literature Review
+    Research on cobot arms & automation              :lr1, 2026-08-01, 2026-09-30
+    Research on displacement sensors & PdM           :lr2, 2026-08-01, 2026-09-30
+    Research on magnetic connectors & relay systems  :lr3, 2026-08-15, 2026-10-15
+    Write up Literature Review section               :lr4, 2026-10-01, 2026-11-15
+
+    section FYP Hardware — Phase 1 (Cable Automation)
+    Magnetic connector sourcing & procurement        :h1, 2026-08-15, 2026-09-30
+    PCB relay board design & fabrication             :h2, 2026-09-01, 2026-10-31
+    Gantry prototype frame build                     :h3, 2026-09-15, 2026-11-15
+    Phase 1 integration & bench testing              :h4, 2026-11-01, 2026-12-31
+
+    section FYP Hardware — Phase 2 (Panel Shifting)
+    Panel shifting mechanism design                  :h5, 2026-12-01, 2027-01-15
+    Panel shifting build & integration               :h6, 2027-01-15, 2027-02-28
+
+    section Software Development
+    PM Simulator (C# WinForms) continued             :s1, 2026-08-01, 2026-11-30
+    Software testing & debugging                     :s3, 2026-11-01, 2026-12-31
+
+    section System Testing & Validation
+    Phase 1 full system integration test             :t1, 2027-01-01, 2027-01-31
+    PM cycle simulation & validation                 :t2, 2027-01-15, 2027-02-28
+    Phase 2 validation (if ready)                    :t3, 2027-02-15, 2027-03-15
+
+    section Report Writing
+    Introduction & Background                        :done, r1, 2026-07-27, 2026-07-27
+    Literature Review write-up                       :r2, 2026-10-01, 2026-11-30
+    Methodology documentation                        :r3, 2026-11-01, 2027-01-15
+    Results & Discussion write-up                    :r4, 2027-01-15, 2027-02-28
+    Final report compilation & polish                :r5, 2027-02-28, 2027-03-31
+    Submission                                       :milestone, r6, 2027-04-01, 0d
+
+    section Presentations & Milestones
+    Progress Report (estimated)                      :milestone, m1, 2026-11-01, 0d
+    Mid-Term Presentation (estimated)                :milestone, m2, 2027-01-15, 0d
+    Slide deck preparation                           :m3, 2027-03-01, 2027-04-01
+    Final Presentation                               :milestone, m4, 2027-04-15, 0d
+```
+
+| Phase | Period | Key Deliverable |
+|---|---|---|
+| Planning & Setup | Aug 2026 | Confirmed scope and supervisor-approved plan |
+| Literature Review | Aug – Nov 2026 | Written Literature Review section in report |
+| FYP Phase 1 Hardware | Aug – Dec 2026 | Working cable plug-in/out prototype |
+| FYP Phase 2 Hardware | Dec 2026 – Feb 2027 | Panel shifting mechanism |
+| Software Development | Aug – Dec 2026 | PM Simulator complete |
+| System Testing | Jan – Mar 2027 | Validated end-to-end PM cycle |
+| Report Writing | Ongoing | Full draft ready by end of March 2027 |
+| Final Presentation | Apr 2027 | Slides and live demo |
+
+---
+
+## 2. Design Alternatives & Feasibility Analysis
+
+Before finalizing the architecture for the automated PM testing station, several design alternatives were evaluated. The core challenge was finding a reliable way for a robotic system to connect a data cable to the OHT sensor ports without human intervention.
+
+### 2.1 The Initial Approach: Vision-Guided Robotics
+
+The first proposed solution was to deploy a high-end Collaborative Robot (cobot) equipped with an advanced vision system, such as the OMRON TM5S. The reasoning was that the existing OHT sensor connection uses a complex 4-pin plug that requires precise alignment to insert correctly. A basic robot arm operating purely on coordinates would fail to make the connection if the OHT was parked even a few millimeters out of position. A camera-equipped robot could dynamically locate the port and adjust its insertion angle on the fly.
+
+However, this approach presented two major constraints:
+1. **Cost:** A vision-equipped cobot like the OMRON TM5S costs upwards of SGD 100,000 to 150,000. This is prohibitively expensive for automating a single step in a PM workflow.
+2. **Alignment Complexity:** Even with a camera, inserting a tight-tolerance 4-pin plug is mechanically difficult and prone to jamming, which could damage the ports on the OHT fleet.
+
+### 2.2 The Second Iteration: Custom 40-Pin Flange Tray
+
+To get around the issue of plugging in multiple individual cables, a secondary approach was considered: creating a non-magnetic, custom 4x 10-pin port tray. This tray would act as an end-effector flange held directly by the cobot, designed to interface with all four sensor ports simultaneously. 
+
+While this seemed efficient in theory, it introduced an even tighter mechanical constraint. Aligning a total of 40 pins simultaneously into their respective female ports requires extremely accurate, perfectly vertical upward positioning from the cobot. Any slight misalignment or angular deviation during insertion would risk bending or shearing the delicate male pins. Given the restrictive capabilities and high cost of deploying a sufficiently advanced vision system to guarantee this precision, this alternative was ultimately deemed too risky for the fleet's hardware.
+
+### 2.3 The Pivot: Hardware Retrofit & Magnetic Connectors
+
+Rather than throwing expensive robotics at a difficult connection problem, a better alternative was identified. By redesigning the connection interface itself, the complexity of the robotic task could be drastically reduced.
+
+The new proposal involves retrofitting the entire OHT fleet with a single, centralised 15-pin magnetic connector (e.g., Rosenberger or HytePro). Because magnetic connectors are self-aligning, they naturally snap into the correct position when brought into close proximity. 
+
+This alternative completely removes the need for a robotic vision system. A low-cost, "blind" cobot (such as the ABB GoFa or PoWa, which cost around SGD 20,000) only needs to move the cable to a rough coordinate. The magnets handle the final millimeter-perfect alignment. 
+
+To account for the fact that a single port now handles all four sensors, a custom PCB relay board is introduced at the testing station. This board acts as an automated switchbank, cycling the data connection through the VHL, OBS Left, OBS Right and OBS Center sensors sequentially without requiring the cobot to physically unplug and replug the cable.
+
+This alternative is vastly superior. It drops the robotics cost by over SGD 100,000, eliminates the risk of bending pins in the data ports and simplifies the software architecture.
+
+### 2.4 Vision System Evaluation (SICK Robot Guidance)
+
+Even with the magnetic plug handling the fine, millimeter-perfect alignment, a coarse vision guidance system is still required to navigate the robotic arm to the general vicinity of the OHT port. Two smart vision systems from SICK were evaluated: the 1.2MP PLOC2D-611-6RB and the 5.1MP PLOC2D-8305-12. 
+
+While the 5.1MP model offers extreme precision (0.11mm accuracy), it is priced at roughly SGD 7,000. In contrast, the 1.2MP model provides 0.23mm accuracy for SGD 3,900. Because the selected magnetic connectors have an inherent mechanical "snap" capture zone of several millimeters, the 0.23mm accuracy of the 1.2MP camera is more than sufficient. Choosing the lower-resolution camera avoids over-engineering and saves the project roughly SGD 3,100 per station without compromising reliability.
+
+### 2.5 Iterative Prototyping Strategy (De-Risking)
+
+A major engineering risk identified early in the project is signal integrity: verifying that the Hokuyo sensor waveform data can survive crossing a magnetic pogo-pin gap and a relay switchbank without dropping packets. 
+
+To mitigate financial risk before purchasing the high-value ABB PoWa cobot, a low-cost bench prototype was mandated. Rather than waiting for custom Printed Circuit Boards (PCBs) to be manufactured, the initial test utilizes raw perfboards. Furthermore, LED indicators were integrated into the circuit. These serve as a critical diagnostic tool to verify the logic control, providing visual confirmation of which sensor channel is active before moving to the final, professional custom PCB deployment for the 304-vehicle fleet.
+
+### 2.6 System Architecture & Signal Switching Logic
+
+To ensure extreme scalability across the 304-vehicle fleet, the hardware architecture was deliberately split into two distinct halves:
+1. **The OHT Side (Passive):** The four sensor cables on the vehicle are routed into a completely passive breakout PCB that terminates into a single magnetic socket. There are no "smart" electronics on the vehicle, making the fleet retrofit incredibly cheap and eliminating software maintenance on the OHTs.
+2. **The Workstation Side (Active):** The cobot holds the magnetic plug. The cable runs from the plug down to an active switching PCB containing the ESP32 microcontroller and the switching logic, which interfaces with the laptop. All complex logic is centralized here.
+
+During the design of the Active Switching Board, mechanical relays were initially considered to route the four sensor signals. However, they were ultimately rejected due to the risk of "contact bounce"—a phenomenon where physical metal contacts bounce microscopically upon closing, which would shred the sensitive Hokuyo data waveform into noise. 
+
+Instead, the design pivoted to utilize an **Analog Multiplexer / IC Switch** (e.g., CD4052). Because IC switches have zero moving parts, they route the data signal cleanly and instantly. Additionally, due to the high electromagnetic interference (EMI) present in a semiconductor fabrication plant, shielded cables and copper ground planes were mandated for the active board to ensure pristine signal integrity.
+
+---
+
+## 3. Methodology
+
+### 3.1 Phased Automation Approach
+
+Rather than trying to automate everything at once, the project adopts a phased approach that addresses the most impactful manual steps first and builds towards a fully integrated solution over time.
 
 **Phase 1 — Automate the Cable Plug-In/Out**
 
-The first phase focuses on using a Collaborative Robot (cobot) arm to handle the physical plugging and unplugging of the data cable between sensor ports. This is the most repetitive mechanical action in the PM workflow and is a good candidate for automation because it does not require complex judgment — the cobot just needs to locate the correct port, connect the cable, hold it in place while the reading is captured, then disconnect and move to the next port.
+The first phase focuses on using a Collaborative Robot (cobot) arm to handle the physical plugging and unplugging of the data cable, utilizing the new magnetic connector logic. This is the most repetitive mechanical action in the PM workflow and is a prime candidate for automation. The cobot moves the magnetic plug to the designated coordinate on the OHT, where it snaps into place, holds the connection while the PM Simulator captures the readings via the relay board, and then disconnects.
 
 Automating this specific step is estimated to remove roughly 10 minutes from each PM cycle. At four OHTs per day and 208 working days per year, that adds up to approximately 416 technician hours saved annually.
 
 **Phase 2 — Automate the Panel Shifting**
 
-The second phase tackles the manual panel shifting that line support currently does to simulate obstacle detection. This involves moving a reflective plate or panel in and out of the sensor's field of view to verify that each sensor correctly registers the presence and absence of an obstacle. Automating this step would require a mechanism — likely motorised or actuator-driven — that can reliably position the panel at the correct location and angle for each sensor test, then retract it again.
+The second phase tackles the manual panel shifting that line support currently does to simulate obstacle detection. This involves moving a reflective plate or panel in and out of the sensor's field of view to verify that each sensor correctly registers the presence and absence of an obstacle. Automating this step requires a motorised or actuator-driven mechanism that can reliably position the panel at the correct location and angle for each sensor test, then retract it again.
 
 This phase has more mechanical complexity than Phase 1, which is why it comes second. Getting the cable connection automated and validated first provides a stable foundation before adding the panel actuation on top.
 
 **Phase 3 — Integrated Stationary Workstation**
 
-Phase 3 is the end state — bringing together the cobot arm, the panel shifting mechanism, and the waveform verification into a single integrated workstation. The idea is that line support would bring an OHT to the station, connect it up, and then step through the PM sequence by pressing a button at each stage. The system handles the physical actions, and the technician's role shifts from doing the manual work to supervising and confirming each step.
+Phase 3 is the end state. It brings together the cobot arm, the panel shifting mechanism and the waveform verification into a single integrated workstation. The idea is that line support would bring an OHT to the station, connect it up and then step through the PM sequence by pressing a button at each stage. The system handles the physical actions and the technician's role shifts from doing the manual work to supervising and confirming each step.
 
 This removes the judgment dependency from the process and creates a consistent, repeatable PM workflow that produces standardised documentation automatically at the end of each session.
 
-### 3.3 Vendor Research & Cost Findings
+---
 
-Four cobot options were evaluated for Phase 1: OMRON TM5S, Universal Robots UR7e, ABB GoFa, and ABB PoWa.
+## 4. Results and Discussion
 
-| Vendor | Est. Price | Reach | Vision |
-|---|---|---|---|
-| OMRON TM5S | SGD 100k – 150k | 900mm | Built-in |
-| UR7e | ~SGD 29k – 36k | 850mm | 3rd Party |
-| ABB GoFa | ~SGD 20k – 30k | Up to 1300mm | SICK (~SGD 5k) |
-| ABB PoWa | ~SGD 15k – 20k | Up to 1300mm | 3rd Party |
+### 4.1 Cost Analysis and Recommended Path
 
-The OMRON was ruled out based on cost — at over SGD 100k, the price is too high relative to what Phase 1 alone delivers. The ABB series came out as the most viable option.
-
-One practical challenge identified was that the existing 4-port plug arrangement on the OHT is not straightforward for a basic vision system to align to reliably. As a more cost-effective alternative, a proposal was put forward to retrofit all 304 OHTs with a single centralised magnetic connector. Because a magnetic plug snaps into place by physical feel, it removes the need for precise vision-guided alignment. At the workstation side, a custom PCB relay board routes the signal to each sensor in sequence, reproducing the same test workflow from one fixed connection point.
-
-The estimated retrofit cost for the full fleet of 304 vehicles:
+The estimated retrofit cost for the full fleet of 304 vehicles to implement the magnetic connector solution:
 
 | Component | Unit Cost | Total (304 OHTs) |
 |---|---|---|
@@ -162,28 +234,32 @@ The estimated retrofit cost for the full fleet of 304 vehicles:
 | **Grand Total — Premium Route** | | **~SGD 22,192** |
 | **Grand Total — Budget Route** | | **~SGD 2,128** |
 
-One-time retrofit labour at ~SGD 24.34/hr (AE rate based on USD 45k/yr, 4-day 12-hour swing shift): **~SGD 7,344** for 304 OHTs at 1 hour each. Estimated rollout: 2.5 to 4 months at 4–6 OHTs per day.
+One-time retrofit labour at ~SGD 24.34/hr (AE rate based on USD 45k/yr, 4-day 12-hour swing shift): ~SGD 7,344 for 304 OHTs at 1 hour each. Estimated rollout: 2.5 to 4 months at 4 to 6 OHTs per day.
 
-### 3.4 Recommended Path & ROI
+The recommended approach is a budget-friendly ABB cobot (~SGD 20k) combined with the budget magnetic plug retrofit (~SGD 2,128) and a custom PCB relay board, bringing the total estimated investment to around SGD 30k. This is roughly one-fifth the cost of the OMRON vision-guided option for the same functional outcome in Phase 1.
 
-The recommended approach is an ABB cobot (~SGD 20k) combined with the budget magnetic plug retrofit (~SGD 2,128) and a custom PCB relay board — bringing the total estimated investment to around SGD 30k. This is roughly one-fifth the cost of the OMRON option for the same functional outcome in Phase 1.
+From an ROI standpoint, the system is projected to recover approximately SGD 10,100 in direct manpower costs per year (416 hrs × SGD 24.34/hr), giving a payback period of around three years. Beyond the direct savings, the automation removes the risk of port damage from repeated manual connections, eliminates waveform reading inconsistency between operators and lays the groundwork for Phases 2 and 3 of the full PM automation roadmap.
 
-From an ROI standpoint, the system is projected to recover approximately SGD 10,100 in direct manpower costs per year (416 hrs × SGD 24.34/hr), giving a payback period of around three years. Beyond the direct savings, the automation removes the risk of port damage from repeated manual connections, eliminates waveform reading inconsistency between operators, and lays the groundwork for Phases 2 and 3 of the full PM automation roadmap.
+### 4.2 Discussion
 
----
-
-## 4. Reflections
-
-Working across both projects during this attachment gave a grounded view of what engineering problem-solving actually looks like when you are working within real operational constraints.
-
-For Project Odin, the most interesting part was understanding why the existing measurement method was failing — not because the vernier caliper is a bad tool, but because the conditions it was being used in made consistent results nearly impossible. Once that was clear, the case for an automated sensor-based approach became straightforward. The practical work of setting up, calibrating, and testing the system was also a good exercise in patience — getting the detection thresholds right took more iterations than expected, and there were moments where what looked like a working result turned out to have edge cases that needed fixing.
-
-For the FYP, going through the phased planning process was the most useful part. It forced a more realistic look at what could actually be done within budget and within a reasonable timeframe, rather than trying to design the ideal solution from scratch. The magnetic plug idea was a direct result of that — finding a way to make the hardware problem simpler instead of throwing more expensive vision hardware at it.
+_To be written._
 
 ---
 
-## 5. Conclusion & Next Steps
+## 5. Conclusion and Recommendations
 
-Project Odin now has a validated prototype in place and is actively collecting wheel measurement data. The next steps are to deploy the system in the maintenance room for proper fleet-wide coverage, and to integrate RFID tagging so that vehicle identification is fully automatic. Building up the dataset over time remains the priority before any predictive maintenance decisions can be made with confidence.
+The feasibility study confirms that automating the sensor PM process is viable at a justifiable cost. Phase 1, the cobot arm for cable plug-in/out, is the immediate focus with the magnetic plug retrofit acting as the critical enabling hardware change. From there, Phase 2 (panel shifting automation) and Phase 3 (integrated workstation) provide a clear path towards a fully streamlined, technician-supervised PM workflow that is consistent, documented and scalable across the fleet.
 
-For the FYP, the feasibility study confirms that automating the sensor PM process is viable at a justifiable cost. Phase 1 — the cobot arm for cable plug-in/out — is the immediate focus, with the magnetic plug retrofit as the enabling hardware change. From there, Phase 2 (panel shifting automation) and Phase 3 (integrated workstation) provide a clear path towards a fully streamlined, technician-supervised PM workflow that is consistent, documented, and scalable across the fleet.
+---
+
+## References
+
+_To be added. Use IEEE citation format._
+
+---
+
+## Appendices
+
+### Appendix A — [To Be Added]
+
+_To be added._
